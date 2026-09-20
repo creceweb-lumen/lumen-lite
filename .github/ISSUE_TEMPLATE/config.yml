@@ -1,1 +1,14 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Lumen website and documentation
+    url: https://creceweb.com.ar/lumen
+    about: General information, documentation and product details.
+
+  - name: Lumen Lite on WordPress.org
+    url: https://wordpress.org/plugins/creceweb-lumen-lite/
+    about: Official distribution page for stable releases.
+
+  - name: Security reports
+    url: https://creceweb.com.ar/
+    about: Do not report vulnerabilities publicly. See SECURITY.md for private reporting instructions.
 
