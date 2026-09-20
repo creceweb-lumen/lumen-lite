@@ -1,1 +1,131 @@
+name: Bug report
+description: Report a reproducible problem in CreceWeb Lumen Lite
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem in CreceWeb Lumen Lite.
+        Please provide enough information to reproduce it.
+
+        Do not include passwords, API keys, private customer data, private URLs, or other sensitive information.
+
+  - type: input
+    id: lite-version
+    attributes:
+      label: Lumen Lite version
+      placeholder: "Example: 1.0.1"
+    validations:
+      required: true
+
+  - type: input
+    id: theme-version
+    attributes:
+      label: Lumen Theme version
+      placeholder: "Example: 1.4.109"
+    validations:
+      required: true
+
+  - type: input
+    id: wordpress-version
+    attributes:
+      label: WordPress version
+      placeholder: "Example: 7.1"
+    validations:
+      required: true
+
+  - type: input
+    id: php-version
+    attributes:
+      label: PHP version
+      placeholder: "Example: 8.2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feature
+    attributes:
+      label: Affected Lumen Lite feature
+      options:
+        - Lumen Library
+        - Reading Progress
+        - Table of Contents
+        - Sharing
+        - Related Content
+        - Floating Action
+        - Messaging
+        - Menu enhancements
+        - Device visibility
+        - Footer tools
+        - Performance
+        - Admin / settings interface
+        - Other / not sure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: pro-status
+    attributes:
+      label: Is Lumen Pro active?
+      options:
+        - "No"
+        - "Yes"
+        - Not sure
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: List the smallest set of steps that reproduces the problem.
+      placeholder: |
+        1. Go to ...
+        2. Enable ...
+        3. Configure ...
+        4. See the problem ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Additional environment details
+      description: Browser, active plugins, page builder, theme settings, cache, or anything else relevant.
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots or logs
+      description: Add screenshots or non-sensitive logs if useful.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I tested with the latest stable Lumen Theme and Lumen Lite releases.
+          required: true
+        - label: I searched existing issues before opening this report.
+          required: true
+        - label: This is not a security vulnerability.
+          required: true
 
