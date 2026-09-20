@@ -1,1 +1,64 @@
+name: Feature request
+description: Suggest an improvement for CreceWeb Lumen Lite
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting an improvement.
+        Please focus on the user problem and expected value rather than implementation details.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Related area
+      options:
+        - Lumen Library
+        - Reading tools
+        - Sharing
+        - Related Content
+        - Floating Action
+        - Messaging
+        - Menu enhancements
+        - Device visibility
+        - Footer tools
+        - Performance
+        - Admin / settings interface
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe the real workflow or limitation you are trying to improve.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested behavior
+      description: Describe the result you would like to see.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or workarounds
+      description: Mention any current workaround if one exists.
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I searched existing issues before opening this request.
+          required: true
+        - label: This request is for Lumen Lite rather than Lumen Pro.
+          required: true
 
