@@ -1,0 +1,17 @@
+.cw-lumen-lite-reading-time {
+	margin-top: .45rem;
+	color: var(--cw-color-muted, #64748b);
+	font-size: .9rem;
+	font-weight: 600;
+	line-height: 1.45;
+}
+
+.cw-single-header-align--center .cw-lumen-lite-reading-time {
+	text-align: center;
+}
+
+
+.cw-card__body .cw-lumen-lite-reading-time {
+	margin: .35rem 0 0;
+	font-size: .82rem;
+}

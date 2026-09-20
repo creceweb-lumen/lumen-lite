@@ -1,0 +1,423 @@
+.cw-lumen-library-overlay {
+	z-index: 100000;
+}
+
+.cw-lumen-library.components-modal__frame {
+	width: min(92vw, 1280px);
+	height: min(90vh, 900px);
+	max-width: 1280px;
+	max-height: 900px;
+	border-radius: 14px;
+	overflow: hidden;
+}
+
+.cw-lumen-library .components-modal__header {
+	margin: 0;
+	padding: 0 24px;
+	border-bottom: 1px solid #dcdcde;
+}
+
+.cw-lumen-library .components-modal__content {
+	margin-top: 64px;
+	padding: 22px 24px 28px;
+	overflow-y: auto;
+}
+
+.cw-lumen-library__controls {
+	position: sticky;
+	top: -22px;
+	z-index: 3;
+	display: grid;
+	gap: 14px;
+	padding: 18px 0 16px;
+	background: #fff;
+	border-bottom: 1px solid #eceef0;
+}
+
+.cw-lumen-library__search {
+	max-width: 520px;
+	margin: 0;
+}
+
+.cw-lumen-library__filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.cw-lumen-library__summary {
+	margin: 16px 0 12px;
+	color: #50575e;
+	font-size: 13px;
+}
+
+.cw-lumen-library__grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 20px;
+}
+
+.cw-lumen-library__card {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+	border: 1px solid #dcdcde;
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 5px 18px rgba(15, 23, 42, .055);
+	overflow: hidden;
+	transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+}
+
+.cw-lumen-library__card:hover {
+	border-color: #9cbeb5;
+	box-shadow: 0 10px 26px rgba(15, 23, 42, .09);
+	transform: translateY(-1px);
+}
+
+.cw-lumen-library__image-frame {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	background: #f2f6f6;
+	overflow: hidden;
+}
+
+.cw-lumen-library__image-frame img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.cw-lumen-library__card-body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 17px;
+}
+
+.cw-lumen-library__category {
+	display: inline-block;
+	margin-bottom: 7px;
+	color: #05855f;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .075em;
+	text-transform: uppercase;
+}
+
+.cw-lumen-library__card h3,
+.cw-lumen-library__detail h2,
+.cw-lumen-library__detail h3 {
+	margin: 0;
+	color: #0f172a;
+}
+
+.cw-lumen-library__card h3 {
+	font-size: 17px;
+	line-height: 1.25;
+}
+
+.cw-lumen-library__card p {
+	margin: 9px 0 17px;
+	color: #50575e;
+	line-height: 1.48;
+}
+
+.cw-lumen-library__card-actions {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 10px;
+	margin-top: auto;
+}
+
+.cw-lumen-library__empty {
+	padding: 72px 24px;
+	border: 1px dashed #c3c4c7;
+	border-radius: 14px;
+	background: #f8f9fa;
+	text-align: center;
+}
+
+.cw-lumen-library__empty h3 {
+	margin: 0 0 8px;
+}
+
+.cw-lumen-library__empty p {
+	margin: 0;
+	color: #646970;
+}
+
+.cw-lumen-library__detail-toolbar {
+	margin-bottom: 18px;
+}
+
+.cw-lumen-library__detail-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.65fr) minmax(280px, .75fr);
+	gap: 28px;
+	align-items: start;
+}
+
+.cw-lumen-library__detail .cw-lumen-library__image-frame {
+	border: 1px solid #dcdcde;
+	border-radius: 14px;
+	box-shadow: 0 12px 34px rgba(15, 23, 42, .08);
+}
+
+.cw-lumen-library__detail-copy {
+	padding: 8px 4px;
+}
+
+.cw-lumen-library__detail-copy h2 {
+	font-size: 26px;
+	line-height: 1.2;
+}
+
+.cw-lumen-library__detail-copy > p {
+	margin: 13px 0 23px;
+	color: #50575e;
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+.cw-lumen-library__detail-copy h3 {
+	font-size: 14px;
+}
+
+@media (max-width: 1050px) {
+	.cw-lumen-library__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.cw-lumen-library__detail-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 680px) {
+	.cw-lumen-library.components-modal__frame {
+		width: 100vw;
+		height: 100vh;
+		max-height: none;
+		border-radius: 0;
+	}
+
+	.cw-lumen-library .components-modal__content {
+		padding-inline: 16px;
+	}
+
+	.cw-lumen-library__grid {
+		grid-template-columns: 1fr;
+	}
+
+	.cw-lumen-library__card-actions {
+		align-items: stretch;
+		flex-direction: column-reverse;
+	}
+
+	.cw-lumen-library__card-actions .components-button {
+		justify-content: center;
+		width: 100%;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cw-lumen-library__card {
+		transition: none;
+	}
+
+	.cw-lumen-library__card:hover {
+		transform: none;
+	}
+}
+
+/* Discoverable editor launcher rendered inside the public PluginSidebar SlotFill. */
+.cw-lumen-library-launcher {
+	display: grid;
+	gap: 16px;
+	padding: 18px 16px 22px;
+}
+
+.cw-lumen-library-launcher__intro {
+	display: grid;
+	grid-template-columns: 42px minmax(0, 1fr);
+	align-items: start;
+	gap: 12px;
+}
+
+.cw-lumen-library-launcher__icon {
+	display: grid;
+	width: 42px;
+	height: 42px;
+	place-items: center;
+	border-radius: 10px;
+	background: #e7f4ef;
+	color: #057354;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1;
+}
+
+.cw-lumen-library-launcher h2,
+.cw-lumen-library-launcher h3,
+.cw-lumen-library-launcher p {
+	margin: 0;
+}
+
+.cw-lumen-library-launcher h2 {
+	color: #0f172a;
+	font-size: 16px;
+	line-height: 1.35;
+}
+
+.cw-lumen-library-launcher__intro p {
+	margin-top: 5px;
+	color: #50575e;
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+.cw-lumen-library-launcher__count {
+	padding: 10px 12px;
+	border: 1px solid #d9e7e2;
+	border-radius: 9px;
+	background: #f5faf8;
+	color: #315f52;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.cw-lumen-library-launcher__primary.components-button {
+	justify-content: center;
+	width: 100%;
+	min-height: 40px;
+}
+
+.cw-lumen-library-launcher__quick-title {
+	padding-top: 3px;
+	color: #1d2327;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: .04em;
+	text-transform: uppercase;
+}
+
+.cw-lumen-library-launcher__quick {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 7px;
+}
+
+.cw-lumen-library-launcher__quick .components-button {
+	justify-content: center;
+	min-width: 0;
+	padding-inline: 7px;
+	font-size: 12px;
+}
+
+.cw-lumen-library-launcher__quick--sources {
+	padding-top: 2px;
+}
+
+.cw-lumen-library-launcher__quick--sources .components-button {
+	border-color: #b8d8cd;
+	background: #f5faf8;
+	color: #245849;
+}
+
+.cw-lumen-library-launcher__hint {
+	padding-top: 2px;
+	color: #646970;
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+@media (max-width: 420px) {
+	.cw-lumen-library-launcher__quick {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* 1.8.111 · Live previews rendered by Gutenberg's public BlockPreview.
+ * The frame keeps the visual library cards uniform while the preview itself
+ * uses the same block renderer and editor styles as the native inserter. */
+.cw-lumen-library__image-frame > .block-editor-block-preview__container {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	pointer-events: none;
+}
+
+.cw-lumen-library__image-frame .block-editor-block-preview__content {
+	min-height: 100%;
+	transform-origin: top left;
+}
+
+.cw-lumen-library__image-frame iframe {
+	pointer-events: none;
+}
+
+
+
+/* 1.8.276 · Enlarged titles in the editor visual Library. */
+.cw-lumen-library__card h3 {
+	font-size: 18px;
+	line-height: 1.3;
+	text-wrap: wrap;
+}
+
+.cw-lumen-library__detail-copy h2 {
+	font-size: 28px;
+	line-height: 1.18;
+	text-wrap: wrap;
+}
+
+
+.cw-lumen-library__meta { display:flex; align-items:center; justify-content:space-between; gap:.65rem; }
+.cw-lumen-library__filters--source { padding-top:.7rem; border-top:1px solid #e2e8f0; }
+
+/* Lumen Library content types. */
+.cw-lumen-library__types,
+.cw-lumen-library-launcher__types {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.cw-lumen-library__types {
+	padding-bottom: 4px;
+	border-bottom: 1px solid #eceef0;
+}
+
+.cw-lumen-library__types .components-button {
+	min-width: 92px;
+	justify-content: center;
+}
+
+.cw-lumen-library-launcher__types {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cw-lumen-library-launcher__types .components-button {
+	justify-content: center;
+	min-width: 0;
+}
+
+.cw-lumen-library__site-meta {
+	margin-top: -7px !important;
+	color: #646970 !important;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+@media (max-width: 420px) {
+	.cw-lumen-library-launcher__types {
+		grid-template-columns: 1fr;
+	}
+}

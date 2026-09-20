@@ -1,0 +1,64 @@
+.cw-lumen-lite-toc {
+	--cw-lumen-lite-toc-border-fallback: color-mix(in srgb, currentColor 18%, transparent);
+	--cw-lumen-lite-toc-background-fallback: color-mix(in srgb, currentColor 5%, transparent);
+	margin-block: 1.5rem 2rem;
+	color: var(--cw-lumen-lite-toc-text, inherit);
+}
+
+.cw-lumen-lite-toc--boxed {
+	padding: 1.15rem 1.25rem;
+	border: 1px solid var(--cw-lumen-lite-toc-border, var(--cw-lumen-lite-toc-border-fallback));
+	border-radius: .75rem;
+	background: var(--cw-lumen-lite-toc-background, var(--cw-lumen-lite-toc-background-fallback));
+}
+
+.cw-lumen-lite-toc__title {
+	margin: 0 0 .8rem;
+	font: inherit;
+	font-weight: 700;
+}
+
+.cw-lumen-lite-toc__list {
+	display: grid;
+	gap: .45rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.cw-lumen-lite-toc__item {
+	margin: 0;
+	padding: 0;
+}
+
+.cw-lumen-lite-toc__item[data-depth="1"] { padding-inline-start: 1rem; }
+.cw-lumen-lite-toc__item[data-depth="2"] { padding-inline-start: 2rem; }
+.cw-lumen-lite-toc__item[data-depth="3"] { padding-inline-start: 3rem; }
+.cw-lumen-lite-toc__item[data-depth="4"] { padding-inline-start: 4rem; }
+
+nav.cw-lumen-lite-toc[data-cw-lumen-toc] .cw-lumen-lite-toc__item > a {
+	color: var(--cw-lumen-lite-toc-link, inherit);
+	text-decoration-thickness: .08em;
+	text-underline-offset: .18em;
+}
+
+nav.cw-lumen-lite-toc[data-cw-lumen-toc] .cw-lumen-lite-toc__item > a:hover,
+nav.cw-lumen-lite-toc[data-cw-lumen-toc] .cw-lumen-lite-toc__item > a:focus-visible {
+	color: var(--cw-lumen-lite-toc-link-hover, var(--cw-lumen-lite-toc-link, inherit));
+	text-decoration-thickness: .14em;
+}
+
+[data-cw-lumen-toc-target] {
+	scroll-margin-top: 6rem;
+}
+
+@media (max-width: 782px) {
+	.cw-lumen-lite-toc--boxed {
+		padding: 1rem;
+	}
+
+	.cw-lumen-lite-toc__item[data-depth="1"] { padding-inline-start: .75rem; }
+	.cw-lumen-lite-toc__item[data-depth="2"] { padding-inline-start: 1.5rem; }
+	.cw-lumen-lite-toc__item[data-depth="3"] { padding-inline-start: 2.25rem; }
+	.cw-lumen-lite-toc__item[data-depth="4"] { padding-inline-start: 3rem; }
+}

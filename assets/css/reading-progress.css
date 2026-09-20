@@ -1,0 +1,37 @@
+/* Lumen Lite Reading Progress. */
+.cw-lumen-lite-reading-progress {
+	position: fixed;
+	left: 0;
+	right: 0;
+	height: var(--cw-lumen-lite-reading-progress-thickness, 4px);
+	pointer-events: none;
+	z-index: 9999;
+	overflow: hidden;
+	background: var(--cw-lumen-lite-reading-progress-track-color, #e2e8f0);
+	box-shadow: 0 1px 3px rgb(15 23 42 / 18%);
+}
+.cw-lumen-lite-reading-progress[data-position="top"] { top: 0; }
+body.admin-bar .cw-lumen-lite-reading-progress[data-position="top"] { top: 32px; }
+.cw-lumen-lite-reading-progress[data-position="bottom"] { bottom: 0; box-shadow: 0 -1px 3px rgb(15 23 42 / 18%); }
+.cw-lumen-lite-reading-progress__bar {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: var(--cw-lumen-lite-reading-progress-color, #10b981);
+	transform: scaleX(0);
+	transform-origin: left center;
+	will-change: transform;
+}
+@media (min-width: 1025px) {
+	.cw-lumen-lite-reading-progress--hide-desktop { display: none !important; }
+}
+@media (min-width: 782px) and (max-width: 1024px) {
+	.cw-lumen-lite-reading-progress--hide-tablet { display: none !important; }
+}
+@media (max-width: 781px) {
+	body.admin-bar .cw-lumen-lite-reading-progress[data-position="top"] { top: 46px; }
+	.cw-lumen-lite-reading-progress--hide-mobile { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.cw-lumen-lite-reading-progress__bar { will-change: auto; }
+}

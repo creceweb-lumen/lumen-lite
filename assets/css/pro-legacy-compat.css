@@ -1,0 +1,77 @@
+/*
+ * Legacy presentation fallback for content previously inserted by Lumen Pro.
+ *
+ * This file does not provide Pro functionality. Lumen Lite loads it
+ * only when the Lumen Pro add-on is unavailable, so active Pro installations
+ * remain fully authoritative for their own pattern presentation.
+ */
+
+.cw-lumen-pro-pattern,
+.cw-lumen-pro-pattern * {
+	box-sizing: border-box;
+}
+
+.cw-lumen-pro-pattern {
+	--cw-lumen-lite-accent-strong: var(--cw-color-accent-strong, var(--wp--preset--color--accent-strong, #059669));
+	--cw-lumen-lite-surface: var(--cw-color-surface, var(--wp--preset--color--surface, #fff));
+	--cw-lumen-lite-muted: var(--cw-color-text-muted, var(--wp--preset--color--text-muted, #64748b));
+	--cw-lumen-lite-border: var(--cw-color-border, var(--wp--preset--color--lumen-border, #cbd5e1));
+	--cw-lumen-lite-radius-item: var(--cw-radius-lg, 1rem);
+}
+
+.cw-lumen-pro-pattern__inner,
+.cw-lumen-pro-hero__inner {
+	width: min(calc(100% - 2rem), var(--cw-layout-wide, 1120px));
+	margin-inline: auto;
+}
+
+.cw-lumen-pro-pattern__eyebrow {
+	margin: 0 0 clamp(.9rem, 1.8vw, 1.3rem);
+	font-size: var(--cw-text-small, var(--wp--preset--font-size--small, .875rem));
+	font-weight: 800;
+	letter-spacing: .1em;
+	line-height: 1.35;
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.cw-lumen-pro-pattern__eyebrow:not(.has-text-color) {
+	color: var(--cw-lumen-lite-accent-strong) !important;
+}
+
+.cw-lumen-pro-pattern__lead {
+	max-width: 62ch;
+	margin-inline: auto;
+	font-size: var(--cw-text-body, var(--wp--preset--font-size--body, 1rem));
+	line-height: 1.65;
+}
+
+.cw-lumen-pro-pattern__lead:not(.has-text-color) {
+	color: var(--cw-lumen-lite-muted) !important;
+}
+
+.cw-lumen-pro-pattern--faq-simple .wp-block-details {
+	margin-block: .8rem;
+	padding: 1.1rem 1.25rem;
+	border: 1px solid var(--cw-lumen-lite-border);
+	border-radius: var(--cw-lumen-lite-radius-item);
+}
+
+.cw-lumen-pro-pattern--faq-simple .wp-block-details:not(.has-background) {
+	background: var(--cw-lumen-lite-surface);
+}
+
+.cw-lumen-pro-hero--base {
+	display: grid;
+	min-height: min(820px, calc(100svh - var(--cw-lumen-header-height, 0px)));
+	padding-block: clamp(7rem, 16vw, 11rem);
+	place-items: center;
+}
+
+.cw-lumen-pro-pattern--services-3,
+.cw-lumen-pro-pattern--benefits,
+.cw-lumen-pro-pattern--process,
+.cw-lumen-pro-pattern--faq-simple,
+.cw-lumen-pro-pattern--cta-centered {
+	padding-block: var(--cw-rhythm-section-padding, clamp(4rem, 8vw, 7rem));
+}

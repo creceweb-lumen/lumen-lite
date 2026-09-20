@@ -1,0 +1,171 @@
+.cw-lumen-lite-sharing {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .75rem 1rem;
+	margin-block: 1.5rem;
+}
+
+.cw-lumen-lite-sharing__title {
+	font-weight: 600;
+}
+
+.cw-lumen-lite-sharing__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: .5rem;
+}
+
+.cw-lumen-lite-sharing__action {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: .45rem;
+	min-height: var(--cw-lumen-sharing-button-size, 40px);
+	padding: .5rem .75rem;
+	border: var(--cw-lumen-sharing-border-width, 1px) solid var(--cw-lumen-sharing-border-color, color-mix(in srgb, currentColor 24%, transparent));
+	border-radius: var(--cw-lumen-sharing-border-radius, 8px);
+	background: var(--cw-lumen-sharing-background, transparent);
+	color: var(--cw-lumen-sharing-color, inherit);
+	font: inherit;
+	line-height: 1.2;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+button.cw-lumen-lite-sharing__action {
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+/* Copy link is the only native button in the action row. Keep its geometry
+ * stable when themes/builders apply generic button hover transforms. */
+body .cw-lumen-lite-sharing .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action,
+body .cw-lumen-lite-sharing .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action:hover,
+body .cw-lumen-lite-sharing .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action:focus,
+body .cw-lumen-lite-sharing .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action:focus-visible,
+body .cw-lumen-lite-sharing .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action:active {
+	box-sizing: border-box;
+	margin: 0;
+	padding: .5rem .75rem;
+	font: inherit;
+	font-weight: inherit;
+	line-height: 1.2;
+	text-align: left;
+	text-transform: none;
+	letter-spacing: normal;
+	transform: none;
+	translate: none;
+	scale: none;
+	rotate: none;
+}
+
+.cw-lumen-lite-sharing__action:hover,
+.cw-lumen-lite-sharing__action:focus-visible {
+	border-color: var(--cw-lumen-sharing-border-color-hover, currentColor);
+	background: var(--cw-lumen-sharing-background-hover, color-mix(in srgb, currentColor 6%, transparent));
+	color: var(--cw-lumen-sharing-color-hover, var(--cw-lumen-sharing-color, inherit));
+	text-decoration: none;
+}
+
+.cw-lumen-lite-sharing__action:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 2px;
+}
+
+.cw-lumen-lite-sharing__icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: var(--cw-lumen-sharing-icon-size, 20px);
+	line-height: 1;
+}
+
+.cw-lumen-lite-sharing__icon,
+.cw-lumen-lite-sharing__label {
+	color: var(--cw-lumen-sharing-color, inherit);
+}
+
+.cw-lumen-lite-sharing__action:hover .cw-lumen-lite-sharing__icon,
+.cw-lumen-lite-sharing__action:hover .cw-lumen-lite-sharing__label,
+.cw-lumen-lite-sharing__action:focus-visible .cw-lumen-lite-sharing__icon,
+.cw-lumen-lite-sharing__action:focus-visible .cw-lumen-lite-sharing__label {
+	color: var(--cw-lumen-sharing-color-hover, var(--cw-lumen-sharing-color, inherit));
+}
+
+.cw-lumen-lite-sharing__icon svg {
+	display: block;
+	width: var(--cw-lumen-sharing-icon-size, 20px);
+	height: var(--cw-lumen-sharing-icon-size, 20px);
+	fill: currentColor;
+}
+
+
+.cw-lumen-lite-sharing--minimal .cw-lumen-lite-sharing__action,
+.cw-lumen-lite-sharing--minimal .cw-lumen-lite-sharing__action:hover,
+.cw-lumen-lite-sharing--minimal .cw-lumen-lite-sharing__action:focus-visible {
+	background: transparent;
+}
+
+/* Keep the native Copy link button visually aligned with anchor actions even when
+ * a builder/theme adds generic button backgrounds after this stylesheet. */
+body .cw-lumen-lite-sharing.cw-lumen-lite-sharing--minimal button.cw-lumen-lite-sharing__action,
+body .cw-lumen-lite-sharing.cw-lumen-lite-sharing--minimal button.cw-lumen-lite-sharing__action:hover,
+body .cw-lumen-lite-sharing.cw-lumen-lite-sharing--minimal button.cw-lumen-lite-sharing__action:focus,
+body .cw-lumen-lite-sharing.cw-lumen-lite-sharing--minimal button.cw-lumen-lite-sharing__action:focus-visible {
+	background: transparent;
+	background-color: transparent;
+	background-image: none;
+	box-shadow: none;
+}
+
+.cw-lumen-lite-sharing--icons-only .cw-lumen-lite-sharing__action {
+	width: var(--cw-lumen-sharing-button-size, 40px);
+	padding-inline: 0;
+}
+
+@media (max-width: 640px) {
+	.cw-lumen-lite-sharing:not(.cw-lumen-lite-sharing--icons-only) .cw-lumen-lite-sharing__actions {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		width: 100%;
+		gap: .5rem .75rem;
+	}
+
+	.cw-lumen-lite-sharing:not(.cw-lumen-lite-sharing--icons-only) .cw-lumen-lite-sharing__action {
+		justify-content: flex-start;
+		width: 100%;
+		min-width: 0;
+	}
+
+	/* Copy link is the only native button. Some themes/builders expose
+	 * important generic button alignment/typography rules on the frontend,
+	 * so this component-level mobile contract must win that cascade. */
+	body .cw-lumen-lite-sharing:not(.cw-lumen-lite-sharing--icons-only) .cw-lumen-lite-sharing__actions button.cw-lumen-lite-sharing__action {
+		display: inline-flex !important;
+		align-items: center !important;
+		justify-content: flex-start !important;
+		width: 100% !important;
+		min-width: 0 !important;
+		margin: 0 !important;
+		padding: .5rem .75rem !important;
+		font: inherit !important;
+		font-weight: inherit !important;
+		line-height: 1.2 !important;
+		text-align: left !important;
+		text-transform: none !important;
+		letter-spacing: normal !important;
+	}
+}
+
+.cw-lumen-lite-sharing__status {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

@@ -1,0 +1,178 @@
+/* Lumen Lite 1.0.1 R36 DEV11 — menu-item emphasis, padded Theme-aligned full-row compact CTA and device visibility. */
+
+.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: var(--cw-header-action-min-height, 2.55rem);
+	padding: var(--cw-header-action-padding-block, .58rem) var(--cw-header-action-padding-inline, 1rem);
+	border: 1px solid transparent;
+	border-radius: var(--cw-header-action-radius, .7rem);
+	color: #fff !important;
+	background: var(--cw-color-primary, #0f766e);
+	box-shadow: 0 8px 22px rgb(15 118 110 / 18%);
+	font-weight: var(--cw-header-action-font-weight, 700);
+	line-height: var(--cw-header-action-line-height, 1.2);
+	white-space: nowrap;
+	text-decoration: none;
+	transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease;
+}
+
+.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a::after {
+	display: none !important;
+}
+
+.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:hover,
+.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:focus-visible {
+	color: #fff !important;
+	background: var(--cw-color-accent-strong, #0b5f58);
+	box-shadow: 0 10px 26px rgb(15 118 110 / 24%);
+	transform: translateY(-1px);
+}
+
+.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:focus-visible {
+	outline: 2px solid currentColor;
+	outline-offset: 3px;
+}
+
+@media (min-width: 1025px) {
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--hide-desktop {
+		display: none !important;
+	}
+}
+
+@media (min-width: 782px) and (max-width: 1024px) {
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--hide-tablet {
+		display: none !important;
+	}
+}
+
+@media (max-width: 781px) {
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--hide-mobile {
+		display: none !important;
+	}
+}
+
+@media (max-width: 1024px) {
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a {
+		width: 100%;
+	}
+}
+
+/* Compact navigation: Lite owns only CTA presentation. Lumen Theme keeps
+ * ownership of the row geometry, parent-link alignment and submenu-toggle
+ * sizing/position. A pseudo-element paints the complete first grid row behind
+ * both controls without changing their layout or the submenu row below. */
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children {
+	position: relative;
+}
+
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children::before {
+	content: '';
+	position: absolute;
+	inset-block-start: 0;
+	inset-inline: 0;
+	height: 3.125rem;
+	border-radius: var(--cw-header-action-radius, .7rem);
+	background: var(--cw-color-primary, #0f766e);
+	box-shadow: 0 8px 22px rgb(15 118 110 / 18%);
+	pointer-events: none;
+	z-index: 0;
+	transition: box-shadow 160ms ease, background-color 160ms ease;
+}
+
+/* Theme draws a divider across ordinary parent rows. The CTA surface replaces
+ * that divider, so it is hidden only for Lite button items. */
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children::after {
+	display: none;
+}
+
+/* Neutralize only Lite's desktop/button skin in compact navigation. These
+ * values mirror Theme's compact parent-row contract and deliberately avoid
+ * redefining grid columns or toggle dimensions. */
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children > a {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	min-height: 3.125rem;
+	padding: 0 1rem;
+	border: 0;
+	border-radius: 0;
+	color: #fff !important;
+	background: transparent;
+	box-shadow: none;
+	transform: none;
+	font-weight: var(--cw-header-action-font-weight, 700);
+	position: relative;
+	z-index: 1;
+}
+
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children > .cw-classic-navigation__submenu-toggle {
+	color: #fff;
+	background: transparent;
+	box-shadow: none;
+	position: relative;
+	z-index: 1;
+}
+
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:hover::before,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:focus-within::before {
+	background: var(--cw-color-accent-strong, #0b5f58);
+	box-shadow: 0 10px 26px rgb(15 118 110 / 24%);
+}
+
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:hover > a,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:focus-within > a,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:hover > .cw-classic-navigation__submenu-toggle,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children:focus-within > .cw-classic-navigation__submenu-toggle,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children.is-submenu-open > .cw-classic-navigation__submenu-toggle {
+	color: #fff !important;
+	background: transparent;
+	box-shadow: none;
+	transform: none;
+}
+
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children > a:focus-visible,
+html.cw-navigation-js .cw-site-header
+	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
+	li.cw-lumen-lite-menu-item--button.menu-item-has-children > .cw-classic-navigation__submenu-toggle:focus-visible {
+	outline: 2px solid #fff;
+	outline-offset: -4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a {
+		transition: none;
+	}
+
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:hover,
+	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:focus-visible {
+		transform: none;
+	}
+}

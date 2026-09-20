@@ -1,0 +1,27 @@
+CreceWeb Lumen Lite bundled resources
+
+Plugin code, interface design, Gutenberg patterns, Library previews, and original visual assets
+Copyright 2026 CreceWeb.
+Source: https://creceweb.com.ar/lumen-lite
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Library preview images and pattern media
+Copyright 2026 CreceWeb.
+Source: Created specifically for CreceWeb Lumen Lite from the plugin's own patterns and original geometric artwork.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Note: No stock photographs, third-party artwork, third-party fonts, or official third-party logo files are bundled in these image assets.
+
+Inline Messaging provider-identifying SVG glyphs
+Copyright 2026 CreceWeb.
+Source: Original local vector glyphs maintained in src/Messaging/GlyphResolver.php for descriptive provider identification.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Note: WhatsApp, Telegram, Messenger, Signal, Meta and related marks belong to their respective owners. The glyphs are not used as CreceWeb branding and no affiliation or endorsement is implied.
+
+Fonts
+No font files or remote font services are bundled or loaded. The plugin uses WordPress/admin/theme typography.
+
+Third-party libraries
+No third-party JavaScript, CSS, font, icon pack, analytics SDK, social SDK, or remote executable library is bundled by Lumen Lite. WordPress core-provided dependencies are referenced through WordPress APIs and are not redistributed.

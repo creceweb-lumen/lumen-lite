@@ -1,0 +1,161 @@
+.cw-lumen-lite-related-content {
+	--cw-lumen-lite-surface: var(--cw-color-surface, var(--wp--preset--color--surface, #fff));
+	--cw-lumen-lite-muted: var(--cw-color-text-muted, var(--wp--preset--color--text-muted, #64748b));
+	--cw-lumen-lite-border: var(--cw-color-border, var(--wp--preset--color--lumen-border, #cbd5e1));
+	--cw-lumen-lite-accent-strong: var(--cw-color-accent-strong, var(--wp--preset--color--accent-strong, #059669));
+	--cw-lumen-lite-focus: var(--cw-color-focus, var(--wp--preset--color--accent-strong, #059669));
+	--cw-lumen-lite-radius-card: var(--cw-radius-md, .75rem);
+	--cw-lumen-lite-related-shadow: 0 12px 32px color-mix(in srgb, var(--cw-lumen-lite-muted) 18%, transparent);
+	width: 100%;
+	min-width: 0;
+	margin-block: clamp(2rem, 5vw, 3.5rem) 0;
+	padding-block-start: clamp(1.25rem, 3vw, 2rem);
+	border-top: 1px solid var(--cw-lumen-lite-border);
+	color: inherit;
+}
+
+.cw-lumen-lite-related-content__title {
+	margin: 0 0 clamp(1rem, 2vw, 1.5rem);
+	color: inherit;
+	font: inherit;
+	font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.cw-lumen-lite-related-content__grid {
+	display: grid;
+	grid-template-columns: repeat(var(--cw-lumen-related-columns-desktop, 3), minmax(0, 1fr));
+	gap: var(--cw-lumen-related-card-gap, clamp(1rem, 2.5vw, 1.5rem));
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.cw-lumen-lite-related-content__item,
+.cw-lumen-lite-related-content__card,
+.cw-lumen-lite-related-content__body {
+	min-width: 0;
+}
+
+.cw-lumen-lite-related-content__card {
+	display: flex;
+	height: 100%;
+	flex-direction: column;
+	overflow: hidden;
+	border: 1px solid var(--cw-lumen-lite-border);
+	border-radius: var(--cw-lumen-lite-radius-card);
+	background: var(--cw-lumen-lite-surface);
+	box-shadow: none;
+}
+
+.cw-lumen-lite-related-content--style-elevated .cw-lumen-lite-related-content__card {
+	border-color: color-mix(in srgb, var(--cw-lumen-lite-border) 72%, transparent);
+	box-shadow: var(--cw-lumen-lite-related-shadow);
+}
+
+.cw-lumen-lite-related-content--style-minimal .cw-lumen-lite-related-content__card {
+	overflow: visible;
+	border-color: transparent;
+	background: transparent;
+	box-shadow: none;
+}
+
+.cw-lumen-lite-related-content__media {
+	display: block;
+	aspect-ratio: var(--cw-lumen-related-image-ratio-width, 16) / var(--cw-lumen-related-image-ratio-height, 9);
+	overflow: hidden;
+	background: color-mix(in srgb, currentColor 5%, transparent);
+}
+
+.cw-lumen-lite-related-content--style-minimal .cw-lumen-lite-related-content__media {
+	border-radius: var(--cw-lumen-lite-radius-card);
+}
+
+.cw-lumen-lite-related-content__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	object-fit: cover;
+	transition: transform 180ms ease;
+}
+
+.cw-lumen-lite-related-content__body {
+	display: flex;
+	flex: 1 1 auto;
+	flex-direction: column;
+	gap: .65rem;
+	padding: clamp(.95rem, 2vw, 1.2rem);
+}
+
+.cw-lumen-lite-related-content--style-minimal .cw-lumen-lite-related-content__body {
+	padding-inline: 0;
+	padding-block-end: 0;
+}
+
+.cw-lumen-lite-related-content__date {
+	color: var(--cw-lumen-lite-muted);
+	font-size: .78rem;
+	line-height: 1.35;
+}
+
+.cw-lumen-lite-related-content__item-title {
+	margin: 0;
+	color: inherit;
+	font: inherit;
+	font-size: 1.05rem;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.cw-lumen-lite-related-content__item-title a {
+	color: inherit;
+	text-decoration: none;
+	text-underline-offset: .16em;
+}
+
+.cw-lumen-lite-related-content__item-title a:hover {
+	color: var(--cw-lumen-lite-accent-strong);
+	text-decoration: underline;
+}
+
+.cw-lumen-lite-related-content__item-title a:focus-visible {
+	outline: 3px solid var(--cw-lumen-lite-focus);
+	outline-offset: 3px;
+	border-radius: .2rem;
+}
+
+.cw-lumen-lite-related-content__excerpt {
+	margin: 0;
+	color: var(--cw-lumen-lite-muted);
+	font-size: .92rem;
+	line-height: 1.6;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.cw-lumen-lite-related-content__media:hover .cw-lumen-lite-related-content__image {
+		transform: scale(1.02);
+	}
+}
+
+@media (max-width: 900px) {
+	.cw-lumen-lite-related-content__grid {
+		grid-template-columns: repeat(var(--cw-lumen-related-columns-tablet, 2), minmax(0, 1fr));
+	}
+}
+
+@media (max-width: 640px) {
+	.cw-lumen-lite-related-content__grid {
+		grid-template-columns: repeat(var(--cw-lumen-related-columns-mobile, 1), minmax(0, 1fr));
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cw-lumen-lite-related-content__image {
+		transition: none;
+	}
+	.cw-lumen-lite-related-content__media:hover .cw-lumen-lite-related-content__image {
+		transform: none;
+	}
+}

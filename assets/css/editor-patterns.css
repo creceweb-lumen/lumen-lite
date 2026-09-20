@@ -1,0 +1,1103 @@
+/*
+ * Lumen Lite 1.0.0-alpha.51 — Hero, testimonials, and CTA QA.
+ *
+ * Pattern defaults match the Library preview. This file crosses Gutenberg's
+ * editor-only wrappers; native block color and typography overrides still win.
+ */
+
+.editor-styles-wrapper .cw-lumen-lite-pattern.alignfull,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern.alignfull {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__inner,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern__inner {
+	box-sizing: border-box !important;
+	width: min(calc(100% - 2rem), var(--cw-layout-wide, 1120px)) !important;
+	max-width: var(--cw-layout-wide, 1120px) !important;
+	min-width: 0 !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__inner--narrow,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern__inner--narrow {
+	width: min(calc(100% - 2rem), 820px) !important;
+	max-width: 820px !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-hero__inner,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-hero__inner {
+	max-width: 1000px !important;
+}
+
+/*
+ * Theme editor.css limits every normal block to 760px. The Hero desktop
+ * preview is based on a 1000px composition, so its direct children must use
+ * that owner width. This does not affect blocks outside this pattern.
+ */
+.editor-styles-wrapper .cw-lumen-lite-hero__inner > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero__inner > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-hero__inner > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block,
+.editor-styles-wrapper .cw-lumen-lite-hero__inner > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 1000px !important;
+	min-width: 0 !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .cw-lumen-lite-hero__title {
+	width: 100% !important;
+	max-width: 1000px !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero__inner .cw-lumen-lite-pattern__lead {
+	max-width: 62ch !important;
+	margin-inline: auto !important;
+}
+
+/* Split Hero owns a two-column desktop composition and a replaceable Image block. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .cw-lumen-lite-hero-split__title {
+	width: 100% !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .cw-lumen-lite-pattern__lead {
+	width: 100% !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .cw-lumen-lite-hero-split__image,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .wp-block.cw-lumen-lite-hero-split__image {
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .cw-lumen-lite-hero-split__image img {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	aspect-ratio: 4 / 3 !important;
+	object-fit: cover !important;
+}
+
+/* Structural wrappers Gutenberg inserts around Groups, Grids and Columns. */
+.editor-styles-wrapper .cw-lumen-lite-pattern__inner > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern__inner > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-layout > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-layout > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-grid,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-grid > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-section-grid > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-columns,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-columns > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-columns > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-card-grid,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-steps,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-metrics-grid {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-column,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-visual-card,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-contact-card,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-card,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-step,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-testimonial,
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-faq-item {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+}
+
+/*
+ * Theme editor.css applies max-width:760px to every normal .wp-block. Inside a
+ * card that becomes wider than the card itself and causes text to cross into
+ * the next column. Card children are local content and must use their owner.
+ */
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-card,
+	.cw-lumen-lite-step,
+	.cw-lumen-lite-contact-card,
+	.cw-lumen-lite-visual-card,
+	.cw-lumen-lite-testimonial
+) > .block-editor-inner-blocks,
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-card,
+	.cw-lumen-lite-step,
+	.cw-lumen-lite-contact-card,
+	.cw-lumen-lite-visual-card,
+	.cw-lumen-lite-testimonial
+) > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-card,
+	.cw-lumen-lite-step,
+	.cw-lumen-lite-contact-card,
+	.cw-lumen-lite-visual-card,
+	.cw-lumen-lite-testimonial
+) > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block,
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-card,
+	.cw-lumen-lite-step,
+	.cw-lumen-lite-contact-card,
+	.cw-lumen-lite-visual-card,
+	.cw-lumen-lite-testimonial
+) > .block-editor-inner-blocks > .block-editor-block-list__layout > .block-editor-block-list__block {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-inline: 0 !important;
+}
+
+/* New Section Grid cards and legacy alpha.28 Columns both stretch evenly. */
+.editor-styles-wrapper .cw-lumen-section-grid--equal-height > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-card-grid > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-steps > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	align-items: stretch !important;
+}
+
+.editor-styles-wrapper .cw-lumen-section-grid--equal-height > .block-editor-inner-blocks > .block-editor-block-list__layout > *,
+.editor-styles-wrapper .cw-lumen-lite-card-grid .wp-block-column,
+.editor-styles-wrapper .cw-lumen-lite-steps .wp-block-column,
+.editor-styles-wrapper .cw-lumen-lite-card-grid .block-editor-block-list__block.wp-block-column,
+.editor-styles-wrapper .cw-lumen-lite-steps .block-editor-block-list__block.wp-block-column {
+	align-self: stretch !important;
+	height: 100% !important;
+	min-width: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-card,
+.editor-styles-wrapper .cw-lumen-lite-step,
+.editor-styles-wrapper .cw-lumen-lite-testimonial {
+	height: 100% !important;
+}
+
+/* Shared heading group consumes the section width without overriding styles. */
+.editor-styles-wrapper .cw-lumen-lite-section-heading,
+.editor-styles-wrapper .cw-lumen-lite-section-heading > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-section-heading > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-section-heading > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-inline: 0 !important;
+}
+
+/* Dark compositions need to defeat Theme heading color only when unset. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base :is(h1, h2, h3, p):not(.has-text-color),
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta :is(h1, h2, h3, p):not(.has-text-color),
+.editor-styles-wrapper .cw-lumen-lite-pattern--metrics :is(h1, h2, h3, p):not(.has-text-color),
+.editor-styles-wrapper .cw-lumen-lite-visual-card :is(h1, h2, h3, p):not(.has-text-color) {
+	color: inherit;
+}
+
+/* Contact card must remain one left-aligned vertical information list. */
+.editor-styles-wrapper .cw-lumen-lite-contact-card > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: stretch !important;
+	gap: clamp(1rem, 2vw, 1.35rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-contact-card :is(h3, p),
+.editor-styles-wrapper .cw-lumen-lite-contact-card .wp-block {
+	width: 100% !important;
+	max-width: 100% !important;
+	margin: 0 !important;
+	text-align: left !important;
+}
+
+/* Details and quote blocks use different editor markup. */
+.editor-styles-wrapper .cw-lumen-lite-faq-item {
+	width: 100% !important;
+	margin-block: .8rem !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-testimonial blockquote,
+.editor-styles-wrapper blockquote.cw-lumen-lite-testimonial {
+	margin: 0;
+}
+
+/* Metrics borders target actual editor column siblings. */
+.editor-styles-wrapper .cw-lumen-lite-metrics-grid .wp-block-column,
+.editor-styles-wrapper .cw-lumen-lite-metrics-grid .block-editor-block-list__block.wp-block-column {
+	padding: 1.25rem;
+	border-inline-end: 1px solid color-mix(in srgb, var(--cw-lumen-lite-inverse, #fff) 18%, transparent);
+}
+
+.editor-styles-wrapper .cw-lumen-lite-metrics-grid .wp-block-column:last-child,
+.editor-styles-wrapper .cw-lumen-lite-metrics-grid .block-editor-block-list__block.wp-block-column:last-child {
+	border-inline-end: 0;
+}
+
+@media (max-width: 781px) {
+	.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__inner,
+	.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern__inner,
+	.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__inner--narrow,
+	.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern__inner--narrow {
+		width: min(calc(100% - 2rem), 100%) !important;
+	}
+
+	.editor-styles-wrapper .cw-lumen-lite-metrics-grid .wp-block-column,
+	.editor-styles-wrapper .cw-lumen-lite-metrics-grid .block-editor-block-list__block.wp-block-column {
+		border-inline-end: 0;
+		border-block-end: 1px solid color-mix(in srgb, var(--cw-lumen-lite-inverse, #fff) 18%, transparent);
+	}
+
+	.editor-styles-wrapper .cw-lumen-lite-metrics-grid .wp-block-column:last-child,
+	.editor-styles-wrapper .cw-lumen-lite-metrics-grid .block-editor-block-list__block.wp-block-column:last-child {
+		border-block-end: 0;
+	}
+}
+
+@media (max-width: 781px) {
+	.editor-styles-wrapper .cw-lumen-lite-pattern--hero-split .cw-lumen-lite-hero-split__title {
+		max-width: none !important;
+	}
+}
+
+/* 1.0.0-alpha.34 · Eyebrow position-control parity. */
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-left {
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-center {
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-right {
+	text-align: right !important;
+}
+
+/* Featured benefits: Gutenberg inserts wrappers inside each Group.
+ * Mirror the same editable core/icon + Paragraph row used on the frontend. */
+.editor-styles-wrapper .cw-lumen-lite-benefits__features,
+.editor-styles-wrapper .cw-lumen-lite-benefits__features > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-benefits__features > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: grid !important;
+	gap: .9rem !important;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature,
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	align-items: center !important;
+	gap: .75rem !important;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature {
+	padding: 1rem !important;
+	border: 1px solid color-mix(in srgb, var(--cw-lumen-lite-accent) 26%, var(--cw-lumen-lite-border)) !important;
+	border-radius: var(--cw-lumen-lite-radius-item) !important;
+	background: color-mix(in srgb, var(--cw-lumen-lite-surface) 88%, transparent) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature > .block-editor-inner-blocks > .block-editor-block-list__layout > * {
+	width: auto !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin-block: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature .cw-lumen-lite-benefits__feature-icon {
+	flex: 0 0 auto !important;
+	width: 1.55rem !important;
+	min-width: 1.55rem !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-benefits__feature .cw-lumen-lite-benefits__feature-text {
+	flex: 1 1 auto !important;
+	width: auto !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+	line-height: 1.5 !important;
+}
+
+/* Centered call to action: frontend was already correct. In Gutenberg and
+ * BlockPreview, wrappers, text, and Buttons are centered too without blocking
+ * an explicit eyebrow alignment selected by the user. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-section-heading,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-section-heading > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-section-heading > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-section-heading :is(h1, h2, h3, .cw-lumen-lite-pattern__lead),
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-section-heading > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block-heading, .cw-lumen-lite-pattern__lead) {
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .wp-block-buttons,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .wp-block-buttons > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .wp-block-buttons > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	justify-content: center !important;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .wp-block-button {
+	width: auto !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+}
+
+
+/* 1.0.0-alpha.39 · Editor parity for the rebuilt Heroes. */
+.editor-styles-wrapper .cw-lumen-lite-pattern.cw-lumen-lite-hero,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern.cw-lumen-lite-hero {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	padding: 0 !important;
+	border-radius: 0 !important;
+	overflow: hidden !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero > .cw-lumen-lite-hero__inner,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-hero__inner {
+	box-sizing: border-box !important;
+	width: min(calc(100% - 2rem), 1180px) !important;
+	max-width: 1180px !important;
+	min-width: 0 !important;
+	min-height: 560px !important;
+	margin-inline: auto !important;
+	padding-block: clamp(3rem, 7vw, 5rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta {
+	background:
+		radial-gradient(circle at 50% 0, color-mix(in srgb, var(--cw-lumen-lite-accent, #10b981) 24%, transparent), transparent 40%),
+		color-mix(in srgb, var(--cw-lumen-lite-primary, #0f172a) 78%, var(--cw-lumen-lite-accent-strong, #059669)) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__inner--center,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__inner--center > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__inner--center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: grid !important;
+	align-items: center !important;
+	justify-items: center !important;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 1180px !important;
+	min-width: 0 !important;
+	margin-inline: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__content--center,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__content--center > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-hero__content--center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	width: min(100%, 960px) !important;
+	max-width: 960px !important;
+	min-width: 0 !important;
+	margin-inline: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-hero__title,
+	.cw-lumen-lite-pattern__lead,
+	.cw-lumen-lite-pattern__buttons,
+	.wp-block-buttons
+) {
+	box-sizing: border-box !important;
+	width: min(100%, 920px) !important;
+	max-width: 920px !important;
+	margin-inline: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .wp-block-buttons,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .wp-block-buttons > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .wp-block-buttons > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	justify-content: center !important;
+	width: 100% !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split {
+	background: color-mix(in srgb, var(--cw-lumen-lite-accent, #10b981) 7%, var(--cw-lumen-lite-background, #f8fafc)) !important;
+}
+
+/* 1.0.0-alpha.40 · CTA Buttons centered across all internal wrappers
+ * used by Gutenberg and BlockPreview. */
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-pattern__buttons,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-pattern__buttons > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-pattern__buttons > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	justify-content: center !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-pattern__buttons .wp-block-button,
+.editor-styles-wrapper .cw-lumen-lite-hero--cta .cw-lumen-lite-pattern__buttons .block-editor-block-list__block.wp-block-button {
+	flex: 0 0 auto !important;
+	width: auto !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+}
+
+/* 1.0.0-alpha.42 · Main presentation: vertical-rhythm parity in Gutenberg.
+ * Explicit margins prevent editor defaults from compacting the composition again. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .cw-lumen-lite-pattern__eyebrow {
+	margin-block: 0 clamp(1.15rem, 2vw, 1.55rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .cw-lumen-lite-hero__title,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base h1:not(.cw-lumen-lite-hero__title):not([style*="font-size"]):not([class*="-font-size"]) {
+	margin-block: 0 clamp(1.25rem, 2.4vw, 1.8rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .cw-lumen-lite-pattern__lead {
+	margin-block: 0 clamp(1.55rem, 2.8vw, 2.1rem) !important;
+}
+
+/* 1.0.0-alpha.41 · Main presentation: center the Buttons block in the editor
+ * and BlockPreview across Gutenberg's internal wrappers. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .cw-lumen-lite-pattern__buttons,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .wp-block-buttons,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .wp-block-buttons > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .wp-block-buttons > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	justify-content: center !important;
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 1000px !important;
+	margin-inline: auto !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .wp-block-buttons .wp-block-button,
+.editor-styles-wrapper .cw-lumen-lite-pattern--hero-base .wp-block-buttons .block-editor-block-list__block.wp-block-button {
+	flex: 0 0 auto !important;
+	width: auto !important;
+	max-width: none !important;
+	margin-inline: 0 !important;
+}
+
+
+
+
+/* 1.0.0-alpha.49 · Image presentation: clean editor contract based on Core
+ * Columns, matching stable editorial compositions. Accumulated Group Grid and
+ * Media & Text experiments were removed. */
+.editor-styles-wrapper .cw-lumen-lite-pattern.cw-lumen-lite-hero--split,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern.cw-lumen-lite-hero--split {
+	box-sizing: border-box !important;
+	position: relative !important;
+	left: auto !important;
+	right: auto !important;
+	inset-inline: auto !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	transform: none !important;
+	overflow: hidden !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split > .cw-lumen-lite-hero__inner--split,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-hero__inner--split {
+	box-sizing: border-box !important;
+	display: block !important;
+	width: min(calc(100% - 2rem), 1180px) !important;
+	max-width: 1180px !important;
+	min-width: 0 !important;
+	min-height: 560px !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	padding-block: clamp(3rem, 7vw, 5rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-wrap: nowrap !important;
+	align-items: center !important;
+	gap: clamp(2rem, 5vw, 4.5rem) !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns > .block-editor-inner-blocks {
+	display: contents !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__content-column,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .block-editor-block-list__block.cw-lumen-lite-hero-split__content-column {
+	box-sizing: border-box !important;
+	flex: 1 1 54% !important;
+	width: auto !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__media-column,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .block-editor-block-list__block.cw-lumen-lite-hero-split__media-column {
+	box-sizing: border-box !important;
+	flex: 1 1 46% !important;
+	width: auto !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero__content,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero__content > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero__content > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 640px !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero__content :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-hero-split__title,
+	.cw-lumen-lite-pattern__lead
+) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-pattern__buttons,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-pattern__buttons > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-pattern__buttons > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	align-items: center !important;
+	justify-content: flex-start !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-pattern__buttons .wp-block-button,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-pattern__buttons .block-editor-block-list__block.wp-block-button {
+	flex: 0 0 auto !important;
+	width: auto !important;
+	max-width: none !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__image,
+.editor-styles-wrapper .cw-lumen-lite-hero--split .wp-block.cw-lumen-lite-hero-split__image {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin: 0 !important;
+	overflow: hidden !important;
+	border: 1px solid color-mix(in srgb, var(--cw-lumen-lite-border, #dbe3ec) 72%, transparent) !important;
+	border-radius: var(--cw-lumen-lite-radius-card, 1rem) !important;
+	box-shadow: 0 24px 60px color-mix(in srgb, var(--cw-lumen-lite-primary, #0f172a) 16%, transparent) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__image img {
+	display: block !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	height: auto !important;
+	max-height: 480px !important;
+	aspect-ratio: 4 / 3 !important;
+	object-fit: cover !important;
+}
+
+@media (max-width: 781px) {
+	.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns,
+	.editor-styles-wrapper .cw-lumen-lite-hero--split .cw-lumen-lite-hero-split__columns > .block-editor-inner-blocks > .block-editor-block-list__layout {
+		display: grid !important;
+		grid-template-columns: minmax(0, 1fr) !important;
+		gap: clamp(2rem, 8vw, 3rem) !important;
+	}
+}
+
+
+/* 1.0.0-alpha.50 · Editorial QA for four Lite patterns. */
+
+/* Image presentation: add top breathing room and center the row within the
+ * usable height without changing image size or columns. */
+.editor-styles-wrapper .cw-lumen-lite-hero--split > .cw-lumen-lite-hero__inner--split,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-hero__inner--split {
+	display: grid !important;
+	align-items: center !important;
+	padding-block-start: clamp(4.35rem, 8vw, 6.25rem) !important;
+	padding-block-end: clamp(3rem, 6vw, 4.75rem) !important;
+}
+
+/* Simple contact information: Theme centers generic headings on some editor
+ * surfaces; this local contract restores side alignment. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__heading, .cw-lumen-lite-section-heading),
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__heading, .cw-lumen-lite-section-heading) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__heading, .cw-lumen-lite-section-heading) > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__heading, .cw-lumen-lite-section-heading) :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-contact-info__title,
+	h2.wp-block-heading,
+	.cw-lumen-lite-pattern__lead
+),
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__heading, .cw-lumen-lite-section-heading) > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	text-align: left !important;
+	justify-self: stretch !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__buttons, .wp-block-buttons),
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__buttons, .wp-block-buttons) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(.cw-lumen-lite-contact-info__buttons, .wp-block-buttons) > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex-wrap: wrap !important;
+	justify-content: flex-start !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-inline: 0 !important;
+}
+
+/* Services, Process, and FAQ: editor-width parity with Simple Testimonials.
+ * Theme limits normal blocks to 760px; these headings belong to the section's
+ * usable width and must also cross the real Gutenberg/BlockList wrappers so
+ * they do not inherit that limit. */
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-pattern--services-three,
+	.cw-lumen-lite-pattern--process,
+	.cw-lumen-lite-pattern--faq
+) :is(
+	.cw-lumen-lite-section-heading,
+	.wp-block.cw-lumen-lite-section-heading,
+	.block-editor-block-list__block.cw-lumen-lite-section-heading,
+	.cw-lumen-lite-section-heading > .block-editor-inner-blocks,
+	.cw-lumen-lite-section-heading > .block-editor-inner-blocks > .block-editor-block-list__layout
+) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-pattern--services-three,
+	.cw-lumen-lite-pattern--process,
+	.cw-lumen-lite-pattern--faq
+) .cw-lumen-lite-section-heading :is(
+	.cw-lumen-lite-section-title,
+	h2.wp-block-heading,
+	[data-type="core/heading"],
+	.block-editor-block-list__block[data-type="core/heading"],
+	[data-type="core/heading"] .block-editor-rich-text__editable
+) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: none !important;
+	min-width: 0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
+.editor-styles-wrapper :is(
+	.cw-lumen-lite-pattern--services-three,
+	.cw-lumen-lite-pattern--process,
+	.cw-lumen-lite-pattern--faq
+) .cw-lumen-lite-section-heading :is(
+	.cw-lumen-lite-section-title,
+	h2.wp-block-heading,
+	[data-type="core/heading"],
+	[data-type="core/heading"] .block-editor-rich-text__editable
+).has-text-align-center {
+	text-align: center !important;
+}
+
+/* Simple testimonials: mirror the validated editor approach where the side
+ * border belongs to the Core Group itself rather than a frontend pseudo-state. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials :is(.cw-lumen-lite-testimonials__heading, .cw-lumen-lite-section-heading),
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials :is(.cw-lumen-lite-testimonials__heading, .cw-lumen-lite-section-heading) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials :is(.cw-lumen-lite-testimonials__heading, .cw-lumen-lite-section-heading) > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials :is(.cw-lumen-lite-testimonials__title, h2.wp-block-heading) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonials__grid,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonials__grid > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonials__grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	display: grid !important;
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	align-items: stretch !important;
+	gap: clamp(1rem, 2vw, 1.5rem) !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	margin-inline: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .block-editor-block-list__block.cw-lumen-lite-testimonial {
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex-direction: column !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	min-width: 0 !important;
+	height: 100% !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display: flex !important;
+	flex: 1 1 auto !important;
+	flex-direction: column !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial__quote,
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials blockquote.cw-lumen-lite-testimonial__quote {
+	box-sizing: border-box !important;
+	display: flex !important;
+	flex: 1 1 auto !important;
+	flex-direction: column !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	height: 100% !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	border: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial__quote cite {
+	margin-top: auto !important;
+	padding-top: 1.3rem !important;
+}
+
+@media (max-width: 900px) {
+	.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonials__grid,
+	.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonials__grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+}
+
+/* Centered call to action: neutralize the alignfull breakout so the editor
+ * canvas, not the viewport, owns the width. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-pattern--cta {
+	box-sizing: border-box !important;
+	position: relative !important;
+	left: auto !important;
+	right: auto !important;
+	inset-inline: auto !important;
+	width: 100% !important;
+	max-width: none !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+	transform: none !important;
+	overflow: hidden !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta > .cw-lumen-lite-hero__inner--center,
+.editor-styles-wrapper .wp-block.cw-lumen-lite-hero__inner--center,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__inner--center > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__inner--center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	display: grid !important;
+	align-items: center !important;
+	justify-items: center !important;
+	width: min(calc(100% - 2rem), 1180px) !important;
+	max-width: 1180px !important;
+	min-width: 0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__content--center,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__content--center > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__content--center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	box-sizing: border-box !important;
+	width: min(100%, 960px) !important;
+	max-width: 960px !important;
+	min-width: 0 !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+	justify-items: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__content--center :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-hero__title,
+	.cw-lumen-lite-pattern__lead,
+	.cw-lumen-lite-pattern__buttons
+) {
+	box-sizing: border-box !important;
+	width: min(100%, 920px) !important;
+	max-width: 920px !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+	justify-self: center !important;
+}
+
+
+/* 1.0.0-alpha.51 · Testimonials: native Core Group controls are authoritative.
+ * Only older insertions without the contract class receive Lite's green fallback. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .cw-lumen-lite-testimonial:not(.cw-lumen-lite-testimonial--native-border),
+.editor-styles-wrapper .cw-lumen-lite-pattern--testimonials .block-editor-block-list__block.cw-lumen-lite-testimonial:not(.cw-lumen-lite-testimonial--native-border) {
+	border-inline-start: 4px solid var(--cw-lumen-lite-accent, #10b981) !important;
+}
+
+/* Centered call to action: vertical-rhythm parity in Gutenberg and BlockPreview. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-pattern__eyebrow {
+	margin-block: 0 clamp(1.15rem, 2vw, 1.55rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-hero__title {
+	margin-block: 0 clamp(1.35rem, 2.5vw, 1.9rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta .cw-lumen-lite-pattern__lead {
+	margin-block: 0 clamp(1.6rem, 2.9vw, 2.2rem) !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--cta :is(
+	.cw-lumen-lite-pattern__buttons,
+	.wp-block-buttons,
+	.wp-block-buttons > .block-editor-inner-blocks,
+	.wp-block-buttons > .block-editor-inner-blocks > .block-editor-block-list__layout
+) {
+	margin-top: 0 !important;
+}
+
+/* 1.0.1 · Post-approval visual parity for Services and Process.
+ * Complements the general width contract already validated in R6 and keeps
+ * the final classes of patterns submitted to WordPress.org unchanged. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--services-three .cw-lumen-lite-section-heading :is(
+	.cw-lumen-lite-section-title,
+	.wp-block-heading,
+	h2
+) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--process .cw-lumen-lite-section-heading :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-section-title,
+	.wp-block-heading,
+	h2
+) {
+	box-sizing: border-box !important;
+	width: 100% !important;
+	max-width: 100% !important;
+	margin-left: 0 !important;
+	margin-right: 0 !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--process .cw-lumen-lite-section-heading :is(
+	.cw-lumen-lite-section-title,
+	.wp-block-heading,
+	h2
+) {
+	text-align: center !important;
+}
+
+/* Explicit eyebrow alignment is authoritative in Gutenberg too. */
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-left {
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-center {
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .cw-lumen-lite-pattern__eyebrow.has-text-align-right {
+	text-align: right !important;
+}
+
+/* Simple contact information: complete native alignment in the editor. */
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-contact-info__title,
+	.cw-lumen-lite-pattern__lead,
+	.cw-lumen-lite-contact-card h3,
+	.cw-lumen-lite-contact-card p
+).has-text-align-left {
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-contact-info__title,
+	.cw-lumen-lite-pattern__lead,
+	.cw-lumen-lite-contact-card h3,
+	.cw-lumen-lite-contact-card p
+).has-text-align-center {
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info :is(
+	.cw-lumen-lite-pattern__eyebrow,
+	.cw-lumen-lite-contact-info__title,
+	.cw-lumen-lite-pattern__lead,
+	.cw-lumen-lite-contact-card h3,
+	.cw-lumen-lite-contact-card p
+).has-text-align-right {
+	text-align: right !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-left,
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-left > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: flex-start !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-center,
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-right,
+.editor-styles-wrapper .cw-lumen-lite-pattern--contact-info .wp-block-buttons.is-content-justification-right > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: flex-end !important;
+}
+
+/* 1.0.1 · Final native-alignment contract for all 10 patterns.
+ * These rules sit at the end of the editor runtime so they override earlier
+ * parity selectors only when Gutenberg expresses an explicit choice through
+ * has-text-align-* / is-content-justification-*. */
+.editor-styles-wrapper .cw-lumen-lite-pattern :is(
+	h1.wp-block-heading,
+	h2.wp-block-heading,
+	h3.wp-block-heading,
+	h4.wp-block-heading,
+	h5.wp-block-heading,
+	h6.wp-block-heading,
+	p
+).has-text-align-left {
+	text-align: left !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern :is(
+	h1.wp-block-heading,
+	h2.wp-block-heading,
+	h3.wp-block-heading,
+	h4.wp-block-heading,
+	h5.wp-block-heading,
+	h6.wp-block-heading,
+	p
+).has-text-align-center {
+	text-align: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern :is(
+	h1.wp-block-heading,
+	h2.wp-block-heading,
+	h3.wp-block-heading,
+	h4.wp-block-heading,
+	h5.wp-block-heading,
+	h6.wp-block-heading,
+	p
+).has-text-align-right {
+	text-align: right !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-left,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-left > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: flex-start !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-center,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-center > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: center !important;
+}
+
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-right,
+.editor-styles-wrapper .cw-lumen-lite-pattern .wp-block-buttons.is-content-justification-right > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	justify-content: flex-end !important;
+}
+
