@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/lumen-lite-logo.webp" alt="CreceWeb Lumen Lite" width="160">
+  <img src="assets/lumen-lite.webp" alt="CreceWeb Lumen Lite" width="160">
 </p>
 
 # CreceWeb Lumen Lite
