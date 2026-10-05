@@ -1,0 +1,162 @@
+{
+  "format": "creceweb-lumen-config",
+  "format_version": 1,
+  "generated_at": "2026-09-30T00:45:00Z",
+  "generator": {
+    "product": "CreceWeb Lumen Lite Kit Preset",
+    "version": "1.1.0"
+  },
+  "sections": {
+    "theme": {
+      "owner": "theme",
+      "schema": 1,
+      "version": "1.4.109",
+      "data": {
+        "design_preset": "custom",
+        "primary_color": "#2448c8",
+        "accent_color": "#a64b32",
+        "accent_strong": "#7d3828",
+        "background_color": "#f3efe7",
+        "surface_color": "#fbf9f4",
+        "text_color": "#373a34",
+        "heading_color": "#171915",
+        "link_color": "#2448c8",
+        "text_muted_color": "#676960",
+        "border_color": "#c9c1b5",
+        "focus_color": "#2448c8",
+        "content_heading_color": "#171915",
+        "content_button_background_color": "#171915",
+        "content_button_hover_color": "#2448c8",
+        "content_button_text_color": "#f3efe7",
+        "content_box_color": "#ebe5da",
+        "content_bullet_color": "#2448c8",
+        "navigation_color": "#373a34",
+        "navigation_hover_color": "#2448c8",
+        "navigation_active_color": "#2448c8",
+        "submenu_background_color": "#fbf9f4",
+        "submenu_hover_text_color": "#f3efe7",
+        "submenu_hover_background_color": "#2448c8",
+        "submenu_hover_background_opacity": "100",
+        "button_background_color": "#171915",
+        "button_hover_color": "#2448c8",
+        "button_text_color": "#f3efe7",
+        "footer_background_color": "#fbf9f4",
+        "footer_text_color": "#373a34",
+        "footer_link_color": "#2448c8",
+        "copyright_background_color": "#ebe5da",
+        "copyright_text_color": "#373a34",
+        "form_background_color": "#fbf9f4",
+        "form_border_color": "#c9c1b5",
+        "form_focus_color": "#2448c8",
+        "top_bar_background_color": "#ebe5da",
+        "top_bar_text_color": "#373a34",
+        "top_bar_link_color": "#2448c8",
+        "font_preset": "system-sans",
+        "heading_preset": "system-serif",
+        "font_scale": "comfortable",
+        "heading_weight": "500",
+        "content_width": "760px",
+        "wide_width": "1340px",
+        "mobile_gutter": "20px",
+        "spacing_density": "normal",
+        "shape": "square",
+        "button_style": "solid",
+        "button_radius": "999",
+        "button_padding_y": "12",
+        "button_padding_x": "20",
+        "form_radius": "2",
+        "link_decoration": "hover",
+        "header_width": "max",
+        "header_tone": "surface",
+        "header_density": "compact",
+        "header_padding": "16",
+        "header_divider": "visible",
+        "navigation_gap": "normal",
+        "navigation_font_size": "14",
+        "navigation_weight": "600",
+        "footer_tone": "surface",
+        "footer_density": "normal",
+        "footer_padding": "44",
+        "motion_preference": "system",
+        "footer_layout_preset": "editorial",
+        "footer_widget_columns": "3",
+        "footer_widget_gap": "28",
+        "mobile_footer_columns": "1",
+        "social_footer_position": "after_widgets",
+        "social_footer_alignment": "center",
+        "social_icon_size": "32",
+        "social_icon_gap": "8",
+        "social_footer_color": "#373a34",
+        "social_footer_hover_color": "#2448c8",
+        "floating_action": "none",
+        "mobile_menu_style": "drawer",
+        "social_mobile_menu_enabled": "1"
+      }
+    },
+    "lite": {
+      "owner": "lite",
+      "schema": 32,
+      "version": "1.1.0",
+      "data": {
+        "color_mode": {
+          "enabled": true,
+          "default_mode": "light",
+          "show_switch": false,
+          "show_menu_switch": true,
+          "position": "right",
+          "devices": {
+            "desktop": true,
+            "tablet": true,
+            "mobile": true
+          },
+          "palette": {
+            "primary": "#89a0ff",
+            "accent": "#e58b70",
+            "background": "#181916",
+            "surface": "#262721",
+            "text": "#dad5cc",
+            "heading": "#f4efe6",
+            "link": "#89a0ff",
+            "border": "#45463f"
+          }
+        }
+      }
+    }
+  },
+  "demo_content": {
+    "social_footer": {
+      "enabled": false,
+      "services": []
+    },
+    "messaging": {
+      "enabled": false,
+      "provider": "whatsapp",
+      "appearance_mode": "custom",
+      "providers": {
+        "whatsapp": {
+          "number": "",
+          "message": ""
+        },
+        "telegram": {
+          "username": "",
+          "message": ""
+        },
+        "messenger": {
+          "username": ""
+        },
+        "signal": {
+          "url": ""
+        }
+      },
+      "background_color": "#171915",
+      "icon_color": "#f3efe7",
+      "size": 46,
+      "position": "right",
+      "devices": {
+        "desktop": true,
+        "tablet": true,
+        "mobile": true
+      }
+    }
+  }
+}
