@@ -1101,3 +1101,533 @@
 	justify-content: flex-end !important;
 }
 
+
+/* K2.3.16 · editor guidance for neutral form shortcode slot. */
+.editor-styles-wrapper .cw-kit-form-slot{
+	width:min(100%,760px);
+	margin:2rem auto 0;
+	padding:1rem;
+	border:1px dashed currentColor;
+	border-radius:var(--cw-radius-md,.75rem);
+}
+.editor-styles-wrapper .cw-kit-form-slot__help{
+	display:block!important;
+	margin:0 0 .75rem!important;
+	font-size:.82rem!important;
+	line-height:1.45;
+	opacity:.75;
+}
+
+
+/* Generic Kit authoring note: hidden on frontend, visible only in Gutenberg. */
+.editor-styles-wrapper :is(.cw-kit-editor-note,.cw-kit-prisma-demo-note){
+	display:block!important;
+	margin:1rem 0 0!important;
+	padding:.75rem .9rem!important;
+	border:1px dashed currentColor;
+	border-radius:var(--cw-radius-sm,.5rem);
+	font-size:.78rem!important;
+	line-height:1.45;
+	opacity:.72;
+}
+
+/* Aurora Site Kits: Gutenberg inserts InnerBlocks wrappers between the page-hero grid
+ * and its editable children. Flatten only those wrappers so the same profile grid used
+ * on the frontend also lays out the editor canvas. Do not depend on editor chrome classes. */
+.cw-kit-aurora-page-hero__grid > .block-editor-inner-blocks,
+.cw-kit-aurora-page-hero__grid > .block-editor-inner-blocks > .block-editor-block-list__layout {
+	display:contents!important;
+}
+
+.cw-kit-aurora-page-hero__grid > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block,.block-editor-block-list__block) {
+	box-sizing:border-box!important;
+	width:auto!important;
+	max-width:none!important;
+	min-width:0!important;
+	margin:0!important;
+}
+
+.cw-lumen-kit-profile--aurora .cw-kit-aurora-index-row__copy :is(h2,h3) a {
+	color:var(--cw-kit-heading)!important;
+}
+
+.cw-lumen-kit-profile--aurora .cw-kit-aurora-index-row__arrow a {
+	color:var(--ap)!important;
+}
+
+
+/* K2.7.7 · Prisma Hero editor parity across Gutenberg InnerBlocks wrappers. */
+.editor-styles-wrapper .cw-kit-prisma-hero__grid > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-kit-prisma-hero__grid > .block-editor-inner-blocks > .block-editor-block-list__layout,
+.editor-styles-wrapper .cw-kit-prisma-hero__media > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-kit-prisma-hero__media > .block-editor-inner-blocks > .block-editor-block-list__layout{display:contents!important}
+.editor-styles-wrapper .cw-kit-prisma-hero__grid > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block,.block-editor-block-list__block){box-sizing:border-box!important;width:auto!important;max-width:none!important;min-width:0!important;margin:0!important}
+.editor-styles-wrapper .cw-kit-prisma-hero__media > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block-image{height:500px!important;margin:0!important;border-radius:150px 22px 22px 150px!important;overflow:hidden!important;box-shadow:0 24px 60px rgba(37,33,30,.16)!important}
+@media(max-width:620px){.editor-styles-wrapper .cw-kit-prisma-hero__media > .block-editor-inner-blocks > .block-editor-block-list__layout > .wp-block-image{height:340px!important;border-radius:22px!important}}
+
+.editor-styles-wrapper .cw-kit-prisma-hero__badge{display:none!important}
+
+/* Prisma: mirror Theme button tokens inside Gutenberg without duplicating Kit colors. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .wp-block-button__link{border-radius:var(--cw-button-radius)!important;padding:var(--cw-button-padding-y) var(--cw-button-padding-x)!important}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .wp-block-button:not(.is-style-outline)>.wp-block-button__link:not(.has-background){background:var(--cw-content-button-background,var(--cw-button-background,#c85f3e))!important;border-color:var(--cw-content-button-background,var(--cw-button-background,#c85f3e))!important}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .wp-block-button:not(.is-style-outline)>.wp-block-button__link:not(.has-text-color):not([style*="color"]){color:var(--cw-content-button-text,var(--cw-button-text,#fffdf9))!important}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .wp-block-button.is-style-outline>.wp-block-button__link:not(.has-background){background:transparent!important;border-color:var(--cw-color-link,#9d432d)!important}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .wp-block-button.is-style-outline>.wp-block-button__link:not(.has-text-color):not([style*="color"]){color:var(--cw-color-link,#9d432d)!important}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-contact-card__copy .wp-block-button>.wp-block-button__link{background:var(--cw-content-box-color,#fffdf9)!important;border-color:var(--cw-content-box-color,#fffdf9)!important;color:var(--cw-color-link,#9d432d)!important}
+
+/* K2.7.11 · Prisma Gutenberg image parity.
+ * Do not depend on Gutenberg component implementation classes. Mirror the
+ * frontend media boxes using stable block/Kit classes, then let either the
+ * direct image or the editor-only wrapper fill that box. */
+.editor-styles-wrapper .cw-kit-prisma-hero__media .wp-block-image{
+	height:500px!important;
+	min-height:500px!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+/* K2.7.16 · Desktop media stretch parity.
+ * Prisma frontend lets these grid items stretch to the real card height.
+ * Do the same in Gutenberg instead of pinning them to a fixed pixel height. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-solution__media{
+	height:auto!important;
+	min-height:340px!important;
+	align-self:stretch!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-featured:not(.cw-kit-prisma-service-card) .wp-block-image{
+	height:auto!important;
+	min-height:330px!important;
+	align-self:stretch!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case--featured .wp-block-image{
+	height:420px!important;
+	min-height:420px!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case:not(.cw-kit-prisma-case--featured):not(.cw-kit-prisma-team-card) .wp-block-image{
+	height:205px!important;
+	min-height:205px!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-contact-card .wp-block-image{
+	height:auto!important;
+	min-height:0!important;
+	align-self:stretch!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-hero__media .wp-block-image,
+	.cw-kit-prisma-solution__media,
+	.cw-kit-prisma-service-featured:not(.cw-kit-prisma-service-card) .wp-block-image,
+	.cw-kit-prisma-case .wp-block-image,
+	.cw-kit-prisma-contact-card .wp-block-image
+) > div{
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-hero__media .wp-block-image,
+	.cw-kit-prisma-solution__media,
+	.cw-kit-prisma-service-featured:not(.cw-kit-prisma-service-card) .wp-block-image,
+	.cw-kit-prisma-case .wp-block-image,
+	.cw-kit-prisma-contact-card .wp-block-image
+) img{
+	display:block!important;
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+	object-fit:cover!important;
+}
+@media(max-width:900px){
+	.editor-styles-wrapper .cw-kit-prisma-hero__media .wp-block-image{height:420px!important;min-height:420px!important}
+}
+@media(max-width:620px){
+	.editor-styles-wrapper .cw-kit-prisma-hero__media .wp-block-image{height:340px!important;min-height:340px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-solution__media{height:210px!important;min-height:210px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-featured:not(.cw-kit-prisma-service-card) .wp-block-image{height:210px!important;min-height:210px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case--featured .wp-block-image{height:330px!important;min-height:330px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case:not(.cw-kit-prisma-case--featured):not(.cw-kit-prisma-team-card) .wp-block-image{height:118px!important;min-height:118px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-contact-card .wp-block-image{height:205px!important;min-height:205px!important}
+}
+/* K2.7.14 · Prisma Gutenberg structural bridge.
+ * Same contract as Aurora: flatten Gutenberg InnerBlocks wrappers and let
+ * prisma.css remain the single source of structural presentation. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-solution,
+	.cw-kit-prisma-service-layout,
+	.cw-kit-prisma-service-featured,
+	.cw-kit-prisma-cases__grid,
+	.cw-kit-prisma-case,
+	.cw-kit-prisma-final-band__grid,
+	.cw-kit-prisma-contact-card,
+	.cw-kit-prisma-services-grid,
+	.cw-kit-prisma-case-study,
+	.cw-kit-prisma-story-head,
+	.cw-kit-prisma-story-cards,
+	.cw-kit-prisma-team__grid,
+	.cw-kit-prisma-contact-layout
+) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-solution,
+	.cw-kit-prisma-service-layout,
+	.cw-kit-prisma-service-featured,
+	.cw-kit-prisma-cases__grid,
+	.cw-kit-prisma-case,
+	.cw-kit-prisma-final-band__grid,
+	.cw-kit-prisma-contact-card,
+	.cw-kit-prisma-services-grid,
+	.cw-kit-prisma-case-study,
+	.cw-kit-prisma-story-head,
+	.cw-kit-prisma-story-cards,
+	.cw-kit-prisma-team__grid,
+	.cw-kit-prisma-contact-layout
+) > .block-editor-inner-blocks > .block-editor-block-list__layout{
+	display:contents!important;
+}
+
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-solution,
+	.cw-kit-prisma-service-layout,
+	.cw-kit-prisma-service-featured,
+	.cw-kit-prisma-cases__grid,
+	.cw-kit-prisma-case,
+	.cw-kit-prisma-final-band__grid,
+	.cw-kit-prisma-contact-card,
+	.cw-kit-prisma-services-grid,
+	.cw-kit-prisma-case-study,
+	.cw-kit-prisma-story-head,
+	.cw-kit-prisma-story-cards,
+	.cw-kit-prisma-team__grid,
+	.cw-kit-prisma-contact-layout
+) > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block,.block-editor-block-list__block){
+	box-sizing:border-box!important;
+	width:auto!important;
+	max-width:none!important;
+	min-width:0!important;
+	margin:0!important;
+}
+
+
+/* Flex-content owners need the same wrapper flattening, but must keep their
+ * own margins (for example margin-top:auto on editorial links). */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-solution__copy,
+	.cw-kit-prisma-case__overlay,
+	.cw-kit-prisma-testimonial-featured__brand,
+	.cw-kit-prisma-contact-card__copy,
+	.cw-kit-prisma-service-card__body
+) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-solution__copy,
+	.cw-kit-prisma-case__overlay,
+	.cw-kit-prisma-testimonial-featured__brand,
+	.cw-kit-prisma-contact-card__copy,
+	.cw-kit-prisma-service-card__body
+) > .block-editor-inner-blocks > .block-editor-block-list__layout{
+	display:contents!important;
+}
+
+/* K2.7.14 · Structural presentation stays in prisma.css; editor only flattens Gutenberg wrappers. */
+
+/* K2.7.15 · Prisma featured case positioning parity.
+ * Gutenberg keeps editable blocks positioned relative in its canvas. The
+ * featured case overlay is intentionally absolute in Prisma, so restate only
+ * that semantic contract with editor-scoped specificity. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case--featured .cw-kit-prisma-case__overlay {
+	position:absolute!important;
+	inset:0 0 0 40%!important;
+	z-index:1!important;
+	box-sizing:border-box!important;
+	width:auto!important;
+	max-width:none!important;
+	margin:0!important;
+}
+@media(max-width:620px){
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case--featured .cw-kit-prisma-case__overlay {
+		inset:auto 0 0!important;
+		min-height:58%!important;
+	}
+}
+
+
+/* K2.7.25 · Prisma internal pages editor parity.
+ * Internal Business patterns use the same layout owners as frontend, but
+ * Gutenberg inserts InnerBlocks wrappers and retains old Home-specific media
+ * rules. Flatten the stable Kit owners and restate only internal-page geometry. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-facts,
+	.cw-kit-prisma-case-study__body,
+	.cw-kit-prisma-story-card,
+	.cw-kit-prisma-story-head,
+	.cw-kit-prisma-process__grid,
+	.cw-kit-prisma-process__step,
+	.cw-kit-prisma-team-card,
+	.cw-kit-prisma-contact-checklist,
+	.cw-kit-prisma-contact-form-card,
+	.cw-kit-prisma-detail__hero-grid,
+	.cw-kit-prisma-detail__facts,
+	.cw-kit-prisma-detail__body-grid,
+	.cw-kit-prisma-detail__section,
+	.cw-kit-prisma-detail__gallery-grid,
+	.cw-kit-prisma-detail__closing-grid
+) > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(
+	.cw-kit-prisma-facts,
+	.cw-kit-prisma-case-study__body,
+	.cw-kit-prisma-story-card,
+	.cw-kit-prisma-story-head,
+	.cw-kit-prisma-process__grid,
+	.cw-kit-prisma-process__step,
+	.cw-kit-prisma-team-card,
+	.cw-kit-prisma-contact-checklist,
+	.cw-kit-prisma-contact-form-card,
+	.cw-kit-prisma-detail__hero-grid,
+	.cw-kit-prisma-detail__facts,
+	.cw-kit-prisma-detail__body-grid,
+	.cw-kit-prisma-detail__section,
+	.cw-kit-prisma-detail__gallery-grid,
+	.cw-kit-prisma-detail__closing-grid
+) > .block-editor-inner-blocks > .block-editor-block-list__layout{
+	display:contents!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-services-grid{
+	grid-template-columns:repeat(auto-fit,minmax(min(100%,32rem),1fr))!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card{
+	display:grid!important;
+	grid-template-columns:42% minmax(0,1fr)!important;
+	align-items:stretch!important;
+}
+
+/* K2.7.28 · Service-card index must not depend on Gutenberg wrapper depth.
+ * The card is the positioning context; any editor wrapper that only carries
+ * the index is flattened and the index itself is anchored by its semantic class. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card{
+	position:relative!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card > .block-editor-inner-blocks,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card > .block-editor-inner-blocks > .block-editor-block-list__layout{
+	position:static!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card :is(.wp-block,.block-editor-block-list__block):has(.cw-kit-prisma-service-card__index){
+	display:contents!important;
+	position:static!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card .cw-kit-prisma-service-card__index{
+	position:absolute!important;
+	top:12px!important;
+	left:10px!important;
+	right:auto!important;
+	bottom:auto!important;
+	width:36px!important;
+	height:36px!important;
+	display:grid!important;
+	place-items:center!important;
+	margin:0!important;
+	z-index:5!important;
+}
+
+/* K2.7.29 · Gutenberg image-block wrapper parity for Services.
+ * Flatten only wrappers that carry the service media so the real figure is
+ * the grid item, matching frontend geometry regardless of wrapper depth. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card :is(.wp-block,.block-editor-block-list__block):has(> .cw-kit-prisma-service-card__media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card :is(.wp-block,.block-editor-block-list__block):has(> :is(.wp-block,.block-editor-block-list__block) > .cw-kit-prisma-service-card__media){
+	display:contents!important;
+	position:static!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__media{
+	grid-column:1!important;
+	grid-row:1!important;
+	height:auto!important;
+	min-height:330px!important;
+	align-self:stretch!important;
+	margin:0!important;
+	box-sizing:border-box!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__media > div,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__media .components-resizable-box__container{
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__media img{
+	display:block!important;
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+	object-fit:cover!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__body{
+	grid-column:2!important;
+	grid-row:1!important;
+	min-width:0!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card .cw-kit-prisma-facts{
+	display:grid!important;
+	grid-template-columns:repeat(3,minmax(0,1fr))!important;
+	gap:.65rem!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card .cw-kit-prisma-facts strong{
+	min-height:2.4em!important;
+	line-height:1.2!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case-study__media{
+	width:100%!important;
+	max-width:none!important;
+	margin:0!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-story-cards,.cw-kit-prisma-team__grid){
+	grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-process__grid{
+	grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr))!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-detail__hero-grid,.cw-kit-prisma-detail__body-grid,.cw-kit-prisma-detail__gallery-grid,.cw-kit-prisma-detail__closing-grid) > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block,.block-editor-block-list__block),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-facts,.cw-kit-prisma-detail__facts,.cw-kit-prisma-detail__section) > .block-editor-inner-blocks > .block-editor-block-list__layout > :is(.wp-block,.block-editor-block-list__block){
+	box-sizing:border-box!important;
+	width:auto!important;
+	max-width:none!important;
+	min-width:0!important;
+	margin:0!important;
+}
+@media(max-width:620px){
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card{grid-template-columns:1fr!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__media{grid-column:1!important;grid-row:1!important;min-height:210px!important}
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-service-card__body{grid-column:1!important;grid-row:2!important}
+}
+
+/* K2.7.30 · Prisma Cases media + About Team image parity.
+ * Cases use a fixed editorial media box on frontend; Gutenberg must preserve
+ * that box through its image wrappers. Team cards now use real editable images. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case-study :is(.wp-block,.block-editor-block-list__block):has(> .cw-kit-prisma-case-study__media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case-study :is(.wp-block,.block-editor-block-list__block):has(> :is(.wp-block,.block-editor-block-list__block) > .cw-kit-prisma-case-study__media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-team-card :is(.wp-block,.block-editor-block-list__block):has(> .cw-kit-prisma-team-card__media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-team-card :is(.wp-block,.block-editor-block-list__block):has(> :is(.wp-block,.block-editor-block-list__block) > .cw-kit-prisma-team-card__media){
+	display:contents!important;
+	position:static!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case-study__media{
+	height:390px!important;
+	min-height:390px!important;
+	align-self:center!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-team-card .cw-kit-prisma-team-card__media{
+	height:150px!important;
+	min-height:150px!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-case-study__media,.cw-kit-prisma-team-card__media) > div,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-case-study__media,.cw-kit-prisma-team-card__media) .components-resizable-box__container{
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma :is(.cw-kit-prisma-case-study__media,.cw-kit-prisma-team-card__media) img{
+	display:block!important;
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+	object-fit:cover!important;
+}
+@media(max-width:620px){
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-case-study__media{height:230px!important;min-height:230px!important}
+}
+
+
+/* Prisma Detail hero media parity in Gutenberg.
+ * Gutenberg wraps both the Image and the badge Paragraph in editor containers.
+ * Flatten only those wrappers and force the media box to inherit the frontend
+ * fixed-height geometry, so both Service Detail and Case Detail keep the image
+ * full-height with the badge anchored over the visual. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-visual{
+	position:relative!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-visual :is(.wp-block,.block-editor-block-list__block):has(> .cw-kit-prisma-detail__hero-media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-visual :is(.wp-block,.block-editor-block-list__block):has(> :is(.wp-block,.block-editor-block-list__block) > .cw-kit-prisma-detail__hero-media),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-visual :is(.wp-block,.block-editor-block-list__block):has(> .cw-kit-prisma-detail__media-badge),
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-visual :is(.wp-block,.block-editor-block-list__block):has(> :is(.wp-block,.block-editor-block-list__block) > .cw-kit-prisma-detail__media-badge){
+	display:contents!important;
+	position:static!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-media{
+	height:380px!important;
+	min-height:380px!important;
+	margin:0!important;
+	overflow:hidden!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-media > div,
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-media .components-resizable-box__container{
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-media img{
+	display:block!important;
+	width:100%!important;
+	max-width:100%!important;
+	height:100%!important;
+	max-height:none!important;
+	object-fit:cover!important;
+}
+@media(max-width:900px){
+	.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__hero-media{height:340px!important;min-height:340px!important}
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-detail__media-badge{
+	position:absolute!important;
+	left:16px!important;
+	bottom:16px!important;
+	top:auto!important;
+	right:auto!important;
+	width:auto!important;
+	max-width:max-content!important;
+	display:inline-block!important;
+	margin:0!important;
+	padding:.35rem .55rem!important;
+	white-space:nowrap!important;
+	z-index:5!important;
+}
+
+/* Prisma fixed-size editable marks: keep Gutenberg color controls from changing
+ * their geometry when core .has-background styles are applied. */
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-solution__number{
+	box-sizing:border-box!important;
+	width:36px!important;
+	min-width:36px!important;
+	max-width:36px!important;
+	height:36px!important;
+	min-height:36px!important;
+	max-height:36px!important;
+	padding:0!important;
+	line-height:1!important;
+	flex:0 0 36px!important;
+}
+.editor-styles-wrapper .cw-lumen-kit-profile--prisma .cw-kit-prisma-testimonial-featured__mark{
+	box-sizing:border-box!important;
+	width:42px!important;
+	min-width:42px!important;
+	max-width:42px!important;
+	height:42px!important;
+	min-height:42px!important;
+	max-height:42px!important;
+	padding:0!important;
+	line-height:1!important;
+	flex:0 0 42px!important;
+}

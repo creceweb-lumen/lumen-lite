@@ -15,3 +15,188 @@
 	margin: .35rem 0 0;
 	font-size: .82rem;
 }
+
+/* Breadcrumbs B1.2: contextual navigation as a measured second row of the native header. */
+.cw-lumen-breadcrumbs {
+	--cw-lumen-breadcrumb-band-bg: var(--cw-color-surface, #f8fafc);
+	--cw-lumen-breadcrumb-band-border: var(--cw-color-border, #e2e8f0);
+	--cw-lumen-breadcrumb-link: var(--cw-color-link, var(--cw-color-accent-strong, #059669));
+	--cw-lumen-breadcrumb-current: var(--cw-color-text, #0f172a);
+	--cw-lumen-breadcrumb-muted: var(--cw-color-text-muted, #64748b);
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	border-block-start: 1px solid var(--cw-lumen-breadcrumb-band-border);
+	border-block-end: 1px solid var(--cw-lumen-breadcrumb-band-border);
+	background: var(--cw-lumen-breadcrumb-band-bg);
+	color: var(--cw-lumen-breadcrumb-muted);
+	font-family: var(--cw-font-sans, inherit);
+	font-size: clamp(.8125rem, .79rem + .1vw, .875rem);
+	line-height: 1.45;
+}
+
+@supports (background: color-mix(in srgb, white 50%, black)) {
+	.cw-lumen-breadcrumbs--bg-auto {
+		background: color-mix(
+			in srgb,
+			var(--cw-color-surface, #f8fafc) 94%,
+			var(--cw-color-primary, #0f172a) 6%
+		);
+	}
+}
+
+.cw-lumen-breadcrumbs--bg-surface {
+	--cw-lumen-breadcrumb-band-bg: var(--cw-color-surface, #f8fafc);
+	background: var(--cw-lumen-breadcrumb-band-bg);
+}
+
+.cw-lumen-breadcrumbs--bg-background {
+	--cw-lumen-breadcrumb-band-bg: var(--cw-color-background, #ffffff);
+	background: var(--cw-lumen-breadcrumb-band-bg);
+}
+
+.cw-lumen-breadcrumbs--no-border {
+	border-block-start-width: 0;
+	border-block-end-width: 0;
+}
+
+.cw-lumen-breadcrumbs__inner {
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	width: min(
+		calc(100% - var(--cw-mobile-gutter, 1rem) - var(--cw-mobile-gutter, 1rem)),
+		var(--cw-header-width, var(--cw-layout-wide, 1120px))
+	);
+	max-width: var(--cw-header-width, var(--cw-layout-wide, 1120px));
+	min-height: 42px;
+	margin-inline: auto;
+	padding-block: .5625rem;
+}
+
+.cw-lumen-breadcrumbs__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: .2rem .42rem;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.cw-lumen-breadcrumbs__item,
+.cw-lumen-breadcrumbs__separator {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.cw-lumen-breadcrumbs__item {
+	min-width: 0;
+}
+
+.cw-lumen-breadcrumbs__item a,
+.cw-lumen-breadcrumbs__item span {
+	display: inline;
+	overflow-wrap: anywhere;
+}
+
+.cw-lumen-breadcrumbs__item a {
+	color: var(--cw-lumen-breadcrumb-link);
+	font-weight: 500;
+	text-decoration: none;
+	text-decoration-thickness: .08em;
+	text-underline-offset: .18em;
+	transition:
+		color var(--cw-motion-fast, 160ms) var(--cw-ease-standard, ease),
+		text-decoration-color var(--cw-motion-fast, 160ms) var(--cw-ease-standard, ease);
+}
+
+.cw-lumen-breadcrumbs__item a:hover {
+	text-decoration: underline;
+}
+
+.cw-lumen-breadcrumbs__item a:focus-visible {
+	border-radius: var(--cw-radius-sm, .25rem);
+	outline: 2px solid var(--cw-color-focus, currentColor);
+	outline-offset: 3px;
+	text-decoration: underline;
+}
+
+.cw-lumen-breadcrumbs__item.is-current {
+	color: var(--cw-lumen-breadcrumb-current);
+	font-weight: 600;
+}
+
+.cw-lumen-breadcrumbs__separator {
+	color: var(--cw-lumen-breadcrumb-muted);
+	font-size: 1.05em;
+	font-weight: 400;
+	line-height: 1;
+	opacity: .7;
+	user-select: none;
+}
+
+
+
+/*
+ * Hero-aware placement.
+ *
+ * Most dedicated Hero templates render the band as a full-width sibling already.
+ * Standard/full-canvas Gutenberg templates inject it through the normal
+ * the_content pipeline, so only known full-width Hero contexts need a safe
+ * viewport breakout here. Compact sidebar Heroes retain their content-column
+ * alignment.
+ */
+body.cw-template--default-first-lumen-hero-full
+	.entry-content
+	> .cw-lumen-breadcrumbs--after-hero,
+body.cw-template--full-first-lumen-hero
+	.entry-content
+	> .cw-lumen-breadcrumbs--after-hero {
+	position: relative;
+	inset-inline-start: 50%;
+	box-sizing: border-box;
+	width: 100vw;
+	max-width: 100vw;
+	margin-inline-start: -50vw;
+	margin-inline-end: -50vw;
+}
+
+@media (min-width: 768px) {
+	.cw-lumen-breadcrumbs__inner {
+		width: min(
+			calc(100% - var(--cw-tablet-gutter, 1.5rem) - var(--cw-tablet-gutter, 1.5rem)),
+			var(--cw-header-width, var(--cw-layout-wide, 1120px))
+		);
+		padding-block: .625rem;
+	}
+
+	.cw-lumen-breadcrumbs__list {
+		gap: .22rem .5rem;
+	}
+}
+
+@media (max-width: 479px) {
+	.cw-lumen-breadcrumbs__inner {
+		min-height: 40px;
+		padding-block: .5rem;
+	}
+
+	.cw-lumen-breadcrumbs__list {
+		gap: .14rem .32rem;
+	}
+
+	.cw-lumen-breadcrumbs__separator {
+		font-size: 1em;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cw-lumen-breadcrumbs__item a {
+		transition: none;
+	}
+}

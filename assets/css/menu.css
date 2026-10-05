@@ -1,4 +1,4 @@
-/* Lumen Lite 1.0.1 R36 DEV11 — menu-item emphasis, padded Theme-aligned full-row compact CTA and device visibility. */
+/* Lumen Lite 1.1.0 K2.5.1 — menu-item emphasis using Theme button tokens and Theme-owned compact geometry. */
 
 .cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a {
 	display: inline-flex;
@@ -8,9 +8,9 @@
 	padding: var(--cw-header-action-padding-block, .58rem) var(--cw-header-action-padding-inline, 1rem);
 	border: 1px solid transparent;
 	border-radius: var(--cw-header-action-radius, .7rem);
-	color: #fff !important;
-	background: var(--cw-color-primary, #0f766e);
-	box-shadow: 0 8px 22px rgb(15 118 110 / 18%);
+	color: var(--cw-button-text, #fff) !important;
+	background: var(--cw-button-background, var(--cw-color-primary, #0f766e));
+	box-shadow: 0 8px 22px color-mix(in srgb, var(--cw-button-background, var(--cw-color-primary, #0f766e)) 18%, transparent);
 	font-weight: var(--cw-header-action-font-weight, 700);
 	line-height: var(--cw-header-action-line-height, 1.2);
 	white-space: nowrap;
@@ -24,9 +24,9 @@
 
 .cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:hover,
 .cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:focus-visible {
-	color: #fff !important;
-	background: var(--cw-color-accent-strong, #0b5f58);
-	box-shadow: 0 10px 26px rgb(15 118 110 / 24%);
+	color: var(--cw-button-text, #fff) !important;
+	background: var(--cw-button-hover, var(--cw-color-accent-strong, #0b5f58));
+	box-shadow: 0 10px 26px color-mix(in srgb, var(--cw-button-hover, var(--cw-color-accent-strong, #0b5f58)) 24%, transparent);
 	transform: translateY(-1px);
 }
 
@@ -78,8 +78,8 @@ html.cw-navigation-js .cw-site-header
 	inset-inline: 0;
 	height: 3.125rem;
 	border-radius: var(--cw-header-action-radius, .7rem);
-	background: var(--cw-color-primary, #0f766e);
-	box-shadow: 0 8px 22px rgb(15 118 110 / 18%);
+	background: var(--cw-button-background, var(--cw-color-primary, #0f766e));
+	box-shadow: 0 8px 22px color-mix(in srgb, var(--cw-button-background, var(--cw-color-primary, #0f766e)) 18%, transparent);
 	pointer-events: none;
 	z-index: 0;
 	transition: box-shadow 160ms ease, background-color 160ms ease;
@@ -106,7 +106,7 @@ html.cw-navigation-js .cw-site-header
 	padding: 0 1rem;
 	border: 0;
 	border-radius: 0;
-	color: #fff !important;
+	color: var(--cw-button-text, #fff) !important;
 	background: transparent;
 	box-shadow: none;
 	transform: none;
@@ -118,7 +118,7 @@ html.cw-navigation-js .cw-site-header
 html.cw-navigation-js .cw-site-header
 	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
 	li.cw-lumen-lite-menu-item--button.menu-item-has-children > .cw-classic-navigation__submenu-toggle {
-	color: #fff;
+	color: var(--cw-button-text, #fff);
 	background: transparent;
 	box-shadow: none;
 	position: relative;
@@ -131,8 +131,8 @@ html.cw-navigation-js .cw-site-header
 html.cw-navigation-js .cw-site-header
 	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
 	li.cw-lumen-lite-menu-item--button.menu-item-has-children:focus-within::before {
-	background: var(--cw-color-accent-strong, #0b5f58);
-	box-shadow: 0 10px 26px rgb(15 118 110 / 24%);
+	background: var(--cw-button-hover, var(--cw-color-accent-strong, #0b5f58));
+	box-shadow: 0 10px 26px color-mix(in srgb, var(--cw-button-hover, var(--cw-color-accent-strong, #0b5f58)) 24%, transparent);
 }
 
 html.cw-navigation-js .cw-site-header
@@ -150,7 +150,7 @@ html.cw-navigation-js .cw-site-header
 html.cw-navigation-js .cw-site-header
 	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
 	li.cw-lumen-lite-menu-item--button.menu-item-has-children.is-submenu-open > .cw-classic-navigation__submenu-toggle {
-	color: #fff !important;
+	color: var(--cw-button-text, #fff) !important;
 	background: transparent;
 	box-shadow: none;
 	transform: none;
@@ -162,7 +162,7 @@ html.cw-navigation-js .cw-site-header
 html.cw-navigation-js .cw-site-header
 	.cw-classic-navigation--primary.cw-compact-navigation-active.is-open
 	li.cw-lumen-lite-menu-item--button.menu-item-has-children > .cw-classic-navigation__submenu-toggle:focus-visible {
-	outline: 2px solid #fff;
+	outline: 2px solid var(--cw-button-text, #fff);
 	outline-offset: -4px;
 }
 
@@ -175,4 +175,51 @@ html.cw-navigation-js .cw-site-header
 	.cw-site-header .cw-classic-navigation__menu li.cw-lumen-lite-menu-item--button > a:focus-visible {
 		transform: none;
 	}
+}
+
+
+/* Optional per-item indicators. Lite owns the decorative content and its
+ * device visibility; Theme continues to own menu-row geometry. */
+.cw-lumen-lite-menu-item__indicator {
+	display:inline-flex;
+	align-items:center;
+	justify-content:center;
+	flex:0 0 auto;
+	margin-inline-end:.45rem;
+	color:currentColor;
+	font-size:.72em;
+	font-weight:600;
+	line-height:1;
+	opacity:.68;
+}
+.cw-lumen-lite-menu-item__indicator svg,
+.cw-lumen-lite-menu-item__indicator-image {
+	display:block;
+	width:1.15rem;
+	height:1.15rem;
+	object-fit:contain;
+}
+@media (min-width:1025px) {
+	.cw-lumen-lite-menu-item__indicator--hide-desktop { display:none!important; }
+}
+@media (min-width:782px) and (max-width:1024px) {
+	.cw-lumen-lite-menu-item__indicator--hide-tablet { display:none!important; }
+}
+@media (max-width:781px) {
+	.cw-lumen-lite-menu-item__indicator--hide-mobile { display:none!important; }
+}
+html.cw-navigation-js .cw-site-header .cw-classic-navigation--primary.cw-compact-navigation-active.is-open .cw-lumen-lite-menu-item__label { min-width:0; }
+html.cw-navigation-js .cw-site-header .cw-classic-navigation--primary.cw-compact-navigation-active.is-open .cw-lumen-lite-menu-item__indicator {
+	justify-content:flex-start;
+	flex-basis:2.4rem;
+	width:2.4rem;
+	max-width:2.4rem;
+	font-size:.68em;
+	font-weight:500;
+	opacity:.62;
+}
+html.cw-navigation-js .cw-site-header .cw-classic-navigation--primary.cw-compact-navigation-active.is-open .cw-lumen-lite-menu-item__indicator svg,
+html.cw-navigation-js .cw-site-header .cw-classic-navigation--primary.cw-compact-navigation-active.is-open .cw-lumen-lite-menu-item__indicator-image {
+	width:1.2rem;
+	height:1.2rem;
 }

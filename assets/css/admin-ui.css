@@ -1,0 +1,375 @@
+/* Lumen Lite 1.2.0 Admin UI System — shared visual language for all Lite-owned screens. */
+/* The Theme-owned hub is 1180px by default; Lite expands it only while this Lite-only stylesheet is loaded. */
+.cw-lumen-hub { width: auto; max-width: none !important; }
+
+.cw-lumen-admin--embedded {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none !important;
+}
+.cw-lumen-admin--embedded .cw-lumen-admin__product-hero,
+.cw-lumen-admin--embedded .cw-lumen-admin__section,
+.cw-lumen-admin--embedded .cw-lumen-ui-tool,
+.cw-lumen-admin--embedded .cw-lumen-ui-tool > form,
+.cw-lumen-admin--embedded .cw-lumen-performance-shell {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none;
+}
+
+/* Shared primitives. */
+.cw-lumen-ui-tool {
+	display: grid;
+	gap: 18px;
+	min-width: 0;
+}
+.cw-lumen-ui-section,
+.cw-lumen-ui-preview {
+	box-sizing: border-box;
+	min-width: 0;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-ui-section { padding: 20px; }
+.cw-lumen-ui-preview { padding: 15px; background: #f8fafc; }
+.cw-lumen-ui-section-head {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none !important;
+	margin: 0;
+	padding: 20px 22px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: linear-gradient(135deg, #f7fcfa 0%, #fff 72%);
+}
+.cw-lumen-ui-option {
+	box-sizing: border-box;
+	min-width: 0;
+	padding: 13px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 11px;
+	background: var(--cw-lumen-admin-soft, #f4f7f6);
+}
+.cw-lumen-ui-tool [hidden] { display: none !important; }
+
+/* Global card, form and action normalization. */
+.cw-lumen-ui-tool .cw-lumen-admin__card--wide { width: 100%; max-width: none !important; }
+.cw-lumen-ui-tool .cw-lumen-admin__card {
+	box-sizing: border-box;
+	border-color: var(--cw-lumen-admin-line, #d7e3df);
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-ui-tool .cw-lumen-admin__field-grid { gap: 16px 20px; }
+.cw-lumen-ui-tool :is(input[type="text"], input[type="url"], input[type="tel"], input[type="number"], select, textarea) {
+	box-sizing: border-box;
+	max-width: 100%;
+}
+.cw-lumen-ui-tool .regular-text,
+.cw-lumen-ui-tool textarea { width: 100%; }
+.cw-lumen-ui-tool .description { color: var(--cw-lumen-admin-muted, #5f6f69); line-height: 1.5; }
+.cw-lumen-ui-tool .cw-lumen-admin__actions {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0;
+	padding: 14px 0 0;
+	border-top: 1px solid #edf2f0;
+}
+.cw-lumen-ui-tool .cw-lumen-admin__actions .button-primary { min-height: 38px; padding-inline: 18px; }
+
+/* Home and Menu. */
+.cw-lumen-ui-tool--home .cw-lumen-admin__home-intro { max-width: none; margin: 0; }
+.cw-lumen-ui-tool--home .cw-lumen-admin__tools-grid { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.cw-lumen-ui-tool--home .cw-lumen-admin__tool-card {
+	box-sizing: border-box;
+	min-width: 0;
+	min-height: 150px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-ui-tool--menu .cw-lumen-admin__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.cw-lumen-ui-tool--menu .cw-lumen-admin__card { min-height: 150px; }
+
+/* Content and blog: shared shell around all internal modules. */
+.cw-lumen-ui-tool--content > form { min-width: 0; }
+.cw-lumen-content-tabs-shell {
+	box-sizing: border-box;
+	width: 100%;
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-content-tabs {
+	position: sticky;
+	top: 32px;
+	z-index: 8;
+	display: flex;
+	gap: 4px;
+	margin: 0 !important;
+	padding: 10px 12px 0 !important;
+	overflow-x: auto;
+	border-bottom: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	background: #f7faf9 !important;
+	scrollbar-width: thin;
+}
+.cw-lumen-content-tabs .nav-tab {
+	flex: 0 0 auto;
+	margin: 0;
+	padding: 10px 13px;
+	border: 1px solid transparent;
+	border-radius: 9px 9px 0 0;
+	white-space: nowrap;
+}
+.cw-lumen-content-tabs .nav-tab-active,
+.cw-lumen-content-tabs .nav-tab-active:hover,
+.cw-lumen-content-tabs .nav-tab-active:focus {
+	border-color: var(--cw-lumen-admin-line, #d7e3df) var(--cw-lumen-admin-line, #d7e3df) #fff;
+	background: #fff;
+	box-shadow: 0 -1px 0 rgb(15 23 42 / 2%);
+}
+.cw-lumen-content-panel { box-sizing: border-box; width: 100%; min-width: 0; padding: 18px; }
+.cw-lumen-content-panel > .cw-lumen-admin__grid { gap: 16px; }
+.cw-lumen-content-panel .cw-lumen-admin__card { background: #fff; }
+.cw-lumen-content-panel :is(.cw-lumen-toc-group, .cw-lumen-related-content-group, .cw-lumen-popular-filter-box) {
+	border-color: var(--cw-lumen-admin-line, #d7e3df);
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+
+/* Floating Action keeps its existing editor language. */
+.cw-lumen-ui-tool--floating-action .cw-lumen-admin__card { padding: 0; overflow: hidden; }
+.cw-lumen-ui-tool--floating-action .cw-lumen-floating-heading { margin: 0; }
+.cw-lumen-ui-tool--floating-action .cw-lumen-floating-heading {
+	padding: 22px 24px;
+	border-bottom: 1px solid #cfe8df;
+	background: linear-gradient(135deg, #f7fcfa 0%, #fff 72%);
+}
+.cw-lumen-ui-tool--floating-action .cw-lumen-floating-layout {
+	grid-template-columns: minmax(0, 1.6fr) minmax(280px, .4fr);
+	gap: 18px;
+	margin: 0;
+	padding: 20px;
+}
+.cw-lumen-floating-panel,
+.cw-lumen-floating-preview-card {
+	border-color: var(--cw-lumen-admin-line, #d7e3df) !important;
+	border-radius: 14px !important;
+	background: #fff !important;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-floating-panel { padding: 18px !important; }
+.cw-lumen-floating-preview-card { position: sticky; top: 48px; padding: 15px !important; }
+.cw-lumen-floating-panel__heading { padding-bottom: 12px; border-bottom: 1px solid #edf2f0; }
+.cw-lumen-floating-devices { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.cw-lumen-floating-devices > label {
+	box-sizing: border-box;
+	min-width: 0;
+	padding: 12px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 11px;
+	background: var(--cw-lumen-admin-soft, #f4f7f6);
+}
+
+/* Messaging: compact sectioned editor with a stable sticky preview. */
+.cw-lumen-ui-tool--messaging .cw-lumen-messaging-card { padding: 0; overflow: hidden; }
+.cw-lumen-messaging-card__head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 24px;
+	padding: 22px 24px;
+	border-bottom: 1px solid #cfe8df;
+	background: linear-gradient(135deg, #f7fcfa 0%, #fff 72%);
+}
+.cw-lumen-messaging-card__head h2 { margin: 0 0 6px; color: var(--cw-lumen-admin-ink, #17382f); font-size: 20px; }
+.cw-lumen-messaging-card__head p { max-width: 720px; margin: 0; color: var(--cw-lumen-admin-muted, #5f6f69); }
+.cw-lumen-messaging-enable {
+	display: inline-flex;
+	flex: 0 0 auto;
+	align-items: center;
+	gap: 8px;
+	min-height: 38px;
+	padding: 8px 12px;
+	border: 1px solid #b7dfd1;
+	border-radius: 999px;
+	background: #eefaf5;
+	color: #176b52;
+	font-weight: 700;
+}
+.cw-lumen-messaging-notice,
+.cw-lumen-messaging-migration { margin: 16px 20px 0 !important; }
+.cw-lumen-messaging-workspace {
+	display: grid;
+	grid-template-columns: minmax(0, 1.65fr) minmax(260px, .35fr);
+	gap: 18px;
+	padding: 20px;
+	align-items: start;
+}
+.cw-lumen-messaging-main { display: grid; min-width: 0; gap: 16px; }
+.cw-lumen-messaging-section,
+.cw-lumen-messaging-devices {
+	box-sizing: border-box;
+	min-width: 0;
+	margin: 0;
+	padding: 18px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-messaging-section--general .cw-lumen-admin__field-grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 14px 16px;
+}
+.cw-lumen-messaging-section--general .cw-lumen-admin__field-grid > p { margin: 0; min-width: 0; }
+.cw-lumen-messaging-section--general :is(select, input[type="number"]) { width: 100%; max-width: none; }
+.cw-lumen-messaging-section--general input[type="color"] { width: 48px; height: 38px; padding: 2px; }
+.cw-lumen-messaging-size-field { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px; }
+.cw-lumen-messaging-size-field > span { color: var(--cw-lumen-admin-muted, #5f6f69); }
+.cw-lumen-messaging-section--provider :is(input[type="text"], input[type="tel"], input[type="url"], textarea) { width: 100%; max-width: none; box-sizing: border-box; }
+.cw-lumen-messaging-section--provider textarea { min-height: 118px; resize: vertical; }
+.cw-lumen-messaging-section--provider .cw-lumen-messaging-provider-field { margin-top: 0; }
+.cw-lumen-messaging-section--provider .cw-lumen-messaging-message-field { margin-top: 18px; }
+.cw-lumen-messaging-preview-card { position: sticky; top: 48px; min-width: 0; }
+.cw-lumen-messaging-preview-card .cw-lumen-floating-preview-stage { min-height: 260px; border-radius: 11px; }
+.cw-lumen-messaging-devices > legend { padding: 0 6px; }
+.cw-lumen-messaging-devices__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.cw-lumen-messaging-devices__grid > label {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+	min-width: 0;
+	padding: 12px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 11px;
+	background: var(--cw-lumen-admin-soft, #f4f7f6);
+}
+.cw-lumen-messaging-devices__grid > label:has(input:checked) { border-color: #9bd4c1; background: #eefaf5; }
+.cw-lumen-messaging-devices .description { margin: 10px 0 0; }
+.cw-lumen-messaging-settings [data-cw-messaging-provider-group][hidden],
+.cw-lumen-messaging-settings [data-cw-messaging-custom-color][hidden] { display: none !important; }
+.cw-lumen-messaging-provider-field--wide { width: 100%; max-width: none; }
+.cw-lumen-messaging-provider-input--wide { width: 100%; max-width: none; box-sizing: border-box; }
+.cw-lumen-messaging-provider-help { display: block; margin-top: 6px; }
+
+/* Footer. */
+.cw-lumen-ui-tool--footer .cw-lumen-admin__footer-tool { width: 100%; max-width: none; padding: 22px; }
+.cw-lumen-ui-tool--footer .cw-lumen-admin__footer-tool textarea { min-height: 140px; }
+.cw-lumen-ui-tool--footer .cw-lumen-admin__preview { margin-top: 16px; background: #f7fcfa; }
+
+/* Performance: preserve all functional tables/filters but use the same surfaces. */
+.cw-lumen-ui-tool--performance { width: 100%; min-width: 0; }
+.cw-lumen-ui-tool--performance > :is(.cw-lumen-performance, .cw-lumen-performance__analyzer, .cw-lumen-performance__view-panel) {
+	box-sizing: border-box;
+	width: 100%;
+	border-color: var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-ui-tool--performance .cw-lumen-performance { padding: 20px 22px; }
+.cw-lumen-ui-tool--performance .cw-lumen-admin__intro { max-width: none; margin-bottom: 18px; }
+.cw-lumen-ui-tool--performance .cw-lumen-performance__analyzer { padding: 20px; }
+.cw-lumen-ui-tool--performance .cw-lumen-performance__view-panel { padding: 18px; }
+.cw-lumen-ui-tool--performance .cw-lumen-performance__table-wrap { max-width: 100%; overflow-x: auto; }
+
+/* Color Mode participates in the same shared shell; detailed behavior remains in color-mode-admin.css. */
+.cw-lumen-ui-tool--color-mode .cw-lumen-color-mode-card { width: 100%; max-width: none; }
+.cw-lumen-ui-tool--color-mode .cw-lumen-color-mode-group { box-shadow: 0 1px 2px rgb(15 23 42 / 3%); }
+
+@media (max-width: 1180px) {
+	.cw-lumen-ui-tool--home .cw-lumen-admin__tools-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.cw-lumen-ui-tool--floating-action .cw-lumen-floating-layout { grid-template-columns: minmax(0, 1fr) minmax(260px, .42fr); }
+	.cw-lumen-messaging-workspace { grid-template-columns: minmax(0, 1.45fr) minmax(240px, .55fr); }
+}
+@media (max-width: 960px) {
+	.cw-lumen-ui-tool--menu .cw-lumen-admin__grid,
+	.cw-lumen-ui-tool--home .cw-lumen-admin__tools-grid { grid-template-columns: 1fr; }
+	.cw-lumen-ui-tool--floating-action .cw-lumen-floating-layout,
+	.cw-lumen-messaging-workspace { grid-template-columns: 1fr; }
+	.cw-lumen-floating-preview-card { position: static; }
+}
+@media (max-width: 782px) {
+	.cw-lumen-ui-section { padding: 15px; }
+	.cw-lumen-ui-section-head { padding: 17px; }
+	.cw-lumen-content-panel { padding: 14px; }
+	.cw-lumen-content-tabs { position: static; padding-inline: 8px !important; }
+	.cw-lumen-floating-devices,
+	.cw-lumen-messaging-devices__grid,
+	.cw-lumen-messaging-section--general .cw-lumen-admin__field-grid { grid-template-columns: 1fr; }
+}
+
+/* Form shells stay full-width inside their Lite tool. */
+.cw-lumen-floating-settings,
+.cw-lumen-messaging-settings {
+	box-sizing: border-box;
+	width: 100%;
+	max-width: none;
+}
+
+@media (max-width: 782px) {
+	.cw-lumen-messaging-card__head { align-items: stretch; flex-direction: column; padding: 18px; }
+	.cw-lumen-messaging-enable { width: fit-content; }
+	.cw-lumen-messaging-workspace { padding: 14px; }
+}
+
+/* Site Kits: complete-site installation lives in Lite admin, not Gutenberg. */
+.cw-lumen-ui-tool--site-kits { gap: 20px; }
+.cw-lumen-site-kits { display: grid; gap: 18px; }
+.cw-lumen-site-kit-card {
+	display: grid;
+	grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+	gap: 22px;
+	box-sizing: border-box;
+	padding: 18px;
+	border: 1px solid var(--cw-lumen-admin-line, #d7e3df);
+	border-radius: 14px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgb(15 23 42 / 3%);
+}
+.cw-lumen-site-kit-card__preview {
+	min-width: 0;
+	overflow: hidden;
+	border: 1px solid #dcdcde;
+	border-radius: 12px;
+	background: #111827;
+	aspect-ratio: 16 / 9;
+}
+.cw-lumen-site-kit-card__preview img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.cw-lumen-site-kit-card__body { min-width: 0; }
+.cw-lumen-site-kit-card__body h3 { margin: 0 0 8px; color: var(--cw-lumen-admin-ink, #17382f); font-size: 22px; }
+.cw-lumen-site-kit-card__body > p { color: var(--cw-lumen-admin-muted, #5f6f69); line-height: 1.55; }
+.cw-lumen-site-kit-card__summary { margin: 16px 0; padding-left: 20px; color: #334155; line-height: 1.65; }
+.cw-lumen-site-kit-card__state {
+	margin: 16px 0;
+	padding: 12px 14px;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	background: #f8fafc;
+}
+.cw-lumen-site-kit-card__state p { margin: 4px 0; }
+.cw-lumen-site-kit-card__form { display: grid; gap: 10px; }
+.cw-lumen-site-kit-card__form > label { font-weight: 600; }
+.cw-lumen-site-kit-card__form .description { margin: 0; }
+.cw-lumen-site-kit-card__form .button-hero { min-height: 42px; }
+.cw-lumen-site-kit-result { margin: 0 !important; padding: 10px 14px; }
+.cw-lumen-site-kit-result ul { margin-left: 20px; list-style: disc; }
+.cw-lumen-site-kit-result__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.cw-lumen-site-kit-result__actions .button { margin: 0; }
+
+@media (max-width: 1040px) {
+	.cw-lumen-site-kit-card { grid-template-columns: 1fr; }
+}
