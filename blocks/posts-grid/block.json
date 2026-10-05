@@ -1,0 +1,139 @@
+{
+  "apiVersion": 3,
+  "name": "creceweb-lumen/posts-grid",
+  "version": "1.1.0",
+  "title": "Lumen Posts",
+  "category": "creceweb-lumen",
+  "icon": "screenoptions",
+  "description": "Display a responsive Lumen post grid or list.",
+  "textdomain": "creceweb-lumen-lite",
+  "editorScript": "creceweb-lumen-lite-posts-grid-block",
+  "editorStyle": [
+    "creceweb-lumen-lite-posts-grid",
+    "creceweb-lumen-lite-posts-grid-editor"
+  ],
+  "attributes": {
+    "useGlobalDefaults": {
+      "type": "boolean",
+      "default": true
+    },
+    "title": {
+      "type": "string",
+      "default": ""
+    },
+    "postType": {
+      "type": "string",
+      "default": "post"
+    },
+    "source": {
+      "type": "string",
+      "default": "latest"
+    },
+    "itemsDesktop": {
+      "type": "number",
+      "default": 6
+    },
+    "itemsTablet": {
+      "type": "number",
+      "default": 4
+    },
+    "itemsMobile": {
+      "type": "number",
+      "default": 3
+    },
+    "orderby": {
+      "type": "string",
+      "default": "date"
+    },
+    "order": {
+      "type": "string",
+      "default": "DESC"
+    },
+    "taxonomy": {
+      "type": "string",
+      "default": ""
+    },
+    "termIds": {
+      "type": "array",
+      "default": []
+    },
+    "manualIds": {
+      "type": "array",
+      "default": []
+    },
+    "showImage": {
+      "type": "boolean",
+      "default": true
+    },
+    "showTaxonomy": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDate": {
+      "type": "boolean",
+      "default": true
+    },
+    "showExcerpt": {
+      "type": "boolean",
+      "default": true
+    },
+    "showReadMore": {
+      "type": "boolean",
+      "default": true
+    },
+    "readMoreText": {
+      "type": "string",
+      "default": "Read more"
+    },
+    "layout": {
+      "type": "string",
+      "default": "grid"
+    },
+    "columnsDesktop": {
+      "type": "number",
+      "default": 3
+    },
+    "columnsTablet": {
+      "type": "number",
+      "default": 2
+    },
+    "columnsMobile": {
+      "type": "number",
+      "default": 1
+    },
+    "imageRatioWidth": {
+      "type": "number",
+      "default": 16
+    },
+    "imageRatioHeight": {
+      "type": "number",
+      "default": 9
+    },
+    "gap": {
+      "type": "number"
+    },
+    "style": {
+      "type": "string",
+      "default": "default"
+    },
+    "desktop": {
+      "type": "boolean",
+      "default": true
+    },
+    "tablet": {
+      "type": "boolean",
+      "default": true
+    },
+    "mobile": {
+      "type": "boolean",
+      "default": true
+    },
+    "extensions": {
+      "type": "object",
+      "default": {}
+    }
+  },
+  "supports": {
+    "html": false
+  }
+}

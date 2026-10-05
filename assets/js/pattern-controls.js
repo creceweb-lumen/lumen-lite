@@ -17,11 +17,58 @@
 	var PanelBody = wp.components.PanelBody;
 	var Button = wp.components.Button;
 	var ButtonGroup = wp.components.ButtonGroup;
+	var ColorPalette = wp.components.ColorPalette;
 	var labels = settings || {};
 
 	function hasClassName(attributes, className) {
 		var current = attributes && attributes.className ? attributes.className : '';
 		return current.split(/\s+/).indexOf(className) !== -1;
+	}
+
+
+	function isAuroraNote(attributes) {
+		return hasClassName(attributes || {}, 'cw-kit-aurora-note');
+	}
+
+	function editorPaletteColors() {
+		var store = typeof wp.data.select === 'function' ? wp.data.select('core/block-editor') : null;
+		var editorSettings = store && typeof store.getSettings === 'function' ? store.getSettings() : null;
+		return editorSettings && Array.isArray(editorSettings.colors) ? editorSettings.colors : [];
+	}
+
+	function auroraNoteAccent(attributes, colors) {
+		var style = attributes && attributes.style ? attributes.style : {};
+		var color = style.color && style.color.text ? style.color.text : '';
+		if (color || !attributes || !attributes.textColor) {
+			return color;
+		}
+		var match = colors.filter(function (item) {
+			return item && item.slug === attributes.textColor;
+		})[0];
+		return match && match.color ? match.color : '';
+	}
+
+	function setAuroraNoteAccent(props, color) {
+		var style = Object.assign({}, props.attributes.style || {});
+		var styleColor = Object.assign({}, style.color || {});
+
+		if (color) {
+			styleColor.text = color;
+			style.color = styleColor;
+			props.setAttributes({ style: style, textColor: undefined });
+			return;
+		}
+
+		delete styleColor.text;
+		if (Object.keys(styleColor).length) {
+			style.color = styleColor;
+		} else {
+			delete style.color;
+		}
+		props.setAttributes({
+			style: Object.keys(style).length ? style : undefined,
+			textColor: undefined
+		});
 	}
 
 	function hasLitePatternAncestor(select, clientId) {
@@ -104,9 +151,62 @@
 		};
 	}, 'withLiteEyebrowControls');
 
+	var withAuroraNoteControls = createHigherOrderComponent(function (BlockEdit) {
+		return function (props) {
+			if (
+				!props.isSelected || props.name !== 'core/group' ||
+				!isAuroraNote(props.attributes) || !ColorPalette
+			) {
+				return createElement(BlockEdit, props);
+			}
+
+			var colors = editorPaletteColors();
+			var current = auroraNoteAccent(props.attributes || {}, colors);
+
+			return createElement(
+				Fragment,
+				null,
+				createElement(BlockEdit, props),
+				createElement(
+					InspectorControls,
+					null,
+					createElement(
+						PanelBody,
+						{ title: labels.notePanelTitle || 'Aurora note', initialOpen: true },
+						createElement('p', { className: 'components-base-control__label' }, labels.noteAccentLabel || 'Accent color'),
+						createElement(ColorPalette, {
+							colors: colors,
+							value: current,
+							disableCustomColors: false,
+							clearable: true,
+							onChange: function (color) {
+								setAuroraNoteAccent(props, color || '');
+							}
+						}),
+						createElement(
+							'p',
+							{ className: 'components-base-control__help' },
+							labels.noteAccentHelp || 'Changes only the top accent line and Open note link.'
+						),
+						current ? createElement(
+							Button,
+							{ variant: 'secondary', onClick: function () { setAuroraNoteAccent(props, ''); } },
+							labels.noteAccentReset || 'Use default accent'
+						) : null
+					)
+				)
+			);
+		};
+	}, 'withAuroraNoteControls');
+
 	addFilter(
 		'editor.BlockEdit',
 		'creceweb-lumen-lite/eyebrow-position-controls',
 		withLiteEyebrowControls
+	);
+	addFilter(
+		'editor.BlockEdit',
+		'creceweb-lumen-lite/aurora-note-accent-controls',
+		withAuroraNoteControls
 	);
 }(window.wp, window.cwLumenLitePatternControls));

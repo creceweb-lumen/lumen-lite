@@ -38,6 +38,15 @@
 		}
 	}
 
+	function isAnalyzedAsset(url) {
+		try {
+			var path = new URL(url, window.location.href).pathname.toLowerCase();
+			return path.endsWith('.css') || path.endsWith('.js');
+		} catch (error) {
+			return false;
+		}
+	}
+
 	function collect() {
 		if (!window.performance || typeof window.performance.getEntriesByType !== 'function') {
 			return [];
@@ -45,7 +54,7 @@
 
 		return window.performance.getEntriesByType('resource')
 			.filter(function (entry) {
-				return entry && isLumenSource(entry.name);
+				return entry && isLumenSource(entry.name) && isAnalyzedAsset(entry.name);
 			})
 			.map(function (entry) {
 				return {
