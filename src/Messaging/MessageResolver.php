@@ -56,7 +56,7 @@ final class MessageResolver {
 		 * @param array<string,mixed> $tokens   Token values used for replacement.
 		 * @param array<string,mixed> $context  Explicit caller context overrides.
 		 */
-				$filtered = apply_filters( 'creceweb_lumen_lite_messaging_resolved_message', $resolved, $template, $tokens, $context, $provider );
+		$filtered = apply_filters( 'creceweb_lumen_lite_messaging_resolved_message', $resolved, $template, $tokens, $context, $provider );
 		$resolved = is_string( $filtered ) ? $filtered : $resolved;
 
 		if ( 'whatsapp' === $provider ) {
@@ -90,14 +90,14 @@ final class MessageResolver {
 		/**
 		 * Filters Messaging message variables before replacement.
 		 *
-		 * This is a normal extension point: Lite does not register locked or
+		 * This is a normal extension point: Lite does not register
 		 * extension-only variables in its own package.
 		 *
 		 * @param array<string,mixed> $tokens   Token values keyed without braces.
 		 * @param array<string,mixed> $context  Explicit caller context overrides.
 		 * @param string              $template Original message template.
 		 */
-				$filtered = apply_filters( 'creceweb_lumen_lite_messaging_message_tokens', $tokens, $context, $template, $provider );
+		$filtered = apply_filters( 'creceweb_lumen_lite_messaging_message_tokens', $tokens, $context, $template, $provider );
 		$tokens = is_array( $filtered ) ? $filtered : $tokens;
 
 		if ( 'whatsapp' === $provider ) {

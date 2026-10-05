@@ -9,14 +9,24 @@ namespace CreceWeb\LumenLite;
 
 use CreceWeb\LumenLite\Admin\Admin;
 use CreceWeb\LumenLite\Content\Controller as ContentController;
+use CreceWeb\LumenLite\ConfigTransfer\Manager as ConfigTransferManager;
+use CreceWeb\LumenLite\ColorMode\Controller as ColorModeController;
+use CreceWeb\LumenLite\Breadcrumbs\Controller as BreadcrumbsController;
 use CreceWeb\LumenLite\Data\Settings;
 use CreceWeb\LumenLite\Footer\Controller as FooterController;
 use CreceWeb\LumenLite\FloatingAction\Controller as FloatingActionController;
 use CreceWeb\LumenLite\Library\Catalog;
 use CreceWeb\LumenLite\Library\Controller as LibraryController;
+use CreceWeb\LumenLite\Library\KitCatalog;
+use CreceWeb\LumenLite\Library\KitPresetManager;
+use CreceWeb\LumenLite\Library\PageCatalog;
+use CreceWeb\LumenLite\Library\SiteKitManager;
 use CreceWeb\LumenLite\Menu\Controller as MenuController;
 use CreceWeb\LumenLite\Performance\MvpController;
+use CreceWeb\LumenLite\PopularContent\Controller as PopularContentController;
+use CreceWeb\LumenLite\PostsGrid\Controller as PostsGridController;
 use CreceWeb\LumenLite\ReadingProgress\Controller as ReadingProgressController;
+use CreceWeb\LumenLite\SearchModal\Controller as SearchModalController;
 use CreceWeb\LumenLite\RelatedContent\Controller as RelatedContentController;
 use CreceWeb\LumenLite\Sharing\Controller as SharingController;
 use CreceWeb\LumenLite\Support\Compatibility;
@@ -38,14 +48,23 @@ final class Plugin {
 	private static ?self $instance = null;
 	private Compatibility $compatibility;
 	private Catalog $catalog;
+	private KitCatalog $kit_catalog;
+	private KitPresetManager $kit_presets;
+	private SiteKitManager $site_kits;
 	private LibraryController $library;
 	private FooterController $footer;
+	private ConfigTransferManager $config_transfer;
 	private ContentController $content;
+	private BreadcrumbsController $breadcrumbs;
 	private MenuController $menu;
 	private ReadingProgressController $reading_progress;
 	private TableOfContentsController $table_of_contents;
 	private SharingController $sharing;
 	private RelatedContentController $related_content;
+	private PopularContentController $popular_content;
+	private PostsGridController $posts_grid;
+	private ColorModeController $color_mode;
+	private SearchModalController $search_modal;
 	private FloatingActionController $floating_action;
 	private MessagingMessageResolver $messaging_message_resolver;
 	private UrlResolver $messaging_url_resolver;
@@ -82,15 +101,24 @@ final class Plugin {
 
 	private function __construct() {
 		$this->compatibility = new Compatibility();
-		$this->catalog       = new Catalog();
-		$this->library       = new LibraryController( $this->compatibility );
-		$this->footer        = new FooterController( $this->compatibility );
+		$this->catalog         = new Catalog();
+		$this->kit_catalog     = new KitCatalog();
+		$this->config_transfer = new ConfigTransferManager();
+		$this->kit_presets     = new KitPresetManager( $this->kit_catalog, $this->config_transfer );
+		$this->library         = new LibraryController( $this->compatibility, $this->kit_catalog, $this->kit_presets );
+		$this->footer          = new FooterController( $this->compatibility );
 		$this->content       = new ContentController( $this->compatibility );
+		$this->breadcrumbs   = new BreadcrumbsController( $this->compatibility );
 		$this->menu             = new MenuController( $this->compatibility );
+		$this->site_kits        = new SiteKitManager( $this->kit_catalog, new PageCatalog(), $this->kit_presets, $this->menu );
 		$this->reading_progress = new ReadingProgressController( $this->compatibility );
 		$this->table_of_contents = new TableOfContentsController( $this->compatibility );
 		$this->sharing          = new SharingController( $this->compatibility );
 		$this->related_content  = new RelatedContentController( $this->compatibility );
+		$this->popular_content  = new PopularContentController( $this->compatibility );
+		$this->posts_grid       = new PostsGridController();
+		$this->color_mode       = new ColorModeController( $this->compatibility );
+		$this->search_modal      = new SearchModalController( $this->compatibility );
 		$this->floating_action            = new FloatingActionController( $this->compatibility );
 		$this->messaging_message_resolver = new MessagingMessageResolver();
 		$this->messaging_url_resolver     = new UrlResolver( $this->messaging_message_resolver );
@@ -112,7 +140,7 @@ final class Plugin {
 			);
 		}
 
-		$this->admin = new Admin( $this->compatibility, $this->footer, $this->content, $this->reading_progress, $this->table_of_contents, $this->sharing, $this->related_content, $this->floating_action, $this->messaging, $this->performance );
+		$this->admin = new Admin( $this->compatibility, $this->footer, $this->content, $this->reading_progress, $this->table_of_contents, $this->sharing, $this->related_content, $this->popular_content, $this->posts_grid, $this->color_mode, $this->search_modal, $this->floating_action, $this->messaging, $this->performance, $this->config_transfer, $this->site_kits );
 	}
 
 	/** @return void */
@@ -127,14 +155,22 @@ final class Plugin {
 		$this->library->register();
 		$this->footer->register();
 		$this->content->register();
+		$this->breadcrumbs->register();
 		$this->menu->register();
 		$this->reading_progress->register();
 		$this->table_of_contents->register();
 		$this->sharing->register();
 		$this->related_content->register();
+		$this->popular_content->register();
+		$this->posts_grid->register();
+		$this->color_mode->register();
+		$this->search_modal->register();
 		$this->floating_action->register();
 		$this->messaging->register();
 		$this->performance->register();
+		$this->config_transfer->register();
+		$this->kit_presets->register();
+		$this->site_kits->register();
 		$this->admin->register();
 	}
 
@@ -171,6 +207,23 @@ final class Plugin {
 	public function enqueue_frontend_assets(): void {
 		if ( $this->library->needs_assets() ) {
 			wp_enqueue_style( 'creceweb-lumen-lite-frontend', CRECEWEB_LUMEN_LITE_URL . 'assets/css/frontend.css', array(), CRECEWEB_LUMEN_LITE_ASSET_VERSION );
+		}
+
+		if ( $this->library->needs_kit_component_assets() ) {
+			wp_enqueue_style(
+				'creceweb-lumen-lite-kit-components',
+				CRECEWEB_LUMEN_LITE_URL . 'assets/css/library-kits/components.css',
+				array( 'creceweb-lumen-lite-frontend' ),
+				CRECEWEB_LUMEN_LITE_ASSET_VERSION
+			);
+			foreach ( $this->library->active_kit_style_profiles() as $id => $profile ) {
+				wp_enqueue_style(
+					'creceweb-lumen-lite-kit-profile-' . $id,
+					$profile['url'],
+					array( 'creceweb-lumen-lite-kit-components' ),
+					CRECEWEB_LUMEN_LITE_ASSET_VERSION
+				);
+			}
 		}
 
 		if ( ! $this->is_lumen_pro_active() && $this->library->needs_legacy_pro_assets() ) {
@@ -212,6 +265,20 @@ final class Plugin {
 			array( 'creceweb-lumen-lite-editor-content' ),
 			CRECEWEB_LUMEN_LITE_ASSET_VERSION
 		);
+		wp_enqueue_style(
+			'creceweb-lumen-lite-kit-components',
+			CRECEWEB_LUMEN_LITE_URL . 'assets/css/library-kits/components.css',
+			array( 'creceweb-lumen-lite-editor-content' ),
+			CRECEWEB_LUMEN_LITE_ASSET_VERSION
+		);
+		foreach ( $this->library->kit_style_profiles() as $id => $profile ) {
+			wp_enqueue_style(
+				'creceweb-lumen-lite-kit-profile-' . $id,
+				$profile['url'],
+				array( 'creceweb-lumen-lite-kit-components' ),
+				CRECEWEB_LUMEN_LITE_ASSET_VERSION
+			);
+		}
 	}
 
 	/** Loads only the Library browser controls in the editor interface. @return void */
@@ -236,12 +303,18 @@ final class Plugin {
 	public function compatibility(): Compatibility { return $this->compatibility; }
 	/** @return Catalog */
 	public function catalog(): Catalog { return $this->catalog; }
+	/** @return KitCatalog */
+	public function kit_catalog(): KitCatalog { return $this->kit_catalog; }
+	/** @return SiteKitManager */
+	public function site_kits(): SiteKitManager { return $this->site_kits; }
 	/** @return LibraryController */
 	public function library(): LibraryController { return $this->library; }
 	/** @return FooterController */
 	public function footer(): FooterController { return $this->footer; }
 	/** @return ContentController */
 	public function content(): ContentController { return $this->content; }
+	/** @return BreadcrumbsController */
+	public function breadcrumbs(): BreadcrumbsController { return $this->breadcrumbs; }
 	/** @return MenuController */
 	public function menu(): MenuController { return $this->menu; }
 	/** @return ReadingProgressController */
@@ -252,6 +325,14 @@ final class Plugin {
 	public function sharing(): SharingController { return $this->sharing; }
 	/** @return RelatedContentController */
 	public function related_content(): RelatedContentController { return $this->related_content; }
+	/** @return PopularContentController */
+	public function popular_content(): PopularContentController { return $this->popular_content; }
+	/** @return PostsGridController */
+	public function posts_grid(): PostsGridController { return $this->posts_grid; }
+	/** @return ColorModeController */
+	public function color_mode(): ColorModeController { return $this->color_mode; }
+	/** @return SearchModalController */
+	public function search_modal(): SearchModalController { return $this->search_modal; }
 	/** @return FloatingActionController */
 	public function floating_action(): FloatingActionController { return $this->floating_action; }
 	/** @return MessagingMessageResolver */

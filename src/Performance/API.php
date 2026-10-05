@@ -95,6 +95,39 @@ if ( ! function_exists( 'cw_lumen_performance_profile_exists' ) ) {
 	}
 }
 
+if ( ! function_exists( 'cw_lumen_performance_diagnose_profile' ) ) {
+	/**
+	 * Runs one registered Lumen Performance profile through the public registry.
+	 *
+	 * @param string              $profile Profile identifier.
+	 * @param array<string,mixed> $args Optional context override.
+	 * @return array<string,mixed>
+	 */
+	function cw_lumen_performance_diagnose_profile( string $profile, array $args = array() ): array {
+		$profile = sanitize_key( $profile );
+		if ( '' === $profile || ! \CreceWeb\LumenLite\Performance\ProfileRegistry::has( $profile ) ) {
+			return array(
+				'schema_version' => '1.0.0',
+				'error'          => 'analysis_profile_unavailable',
+			);
+		}
+
+		$report = \CreceWeb\LumenLite\Performance\ProfileRegistry::diagnose( $profile, $args );
+		if ( ! empty( $report['error'] ) ) {
+			return $report;
+		}
+
+		if ( ! \CreceWeb\LumenLite\Performance\ProfileRegistry::validate_report( $profile, $report ) ) {
+			return array(
+				'schema_version' => '1.0.0',
+				'error'          => 'analysis_profile_invalid_scope',
+			);
+		}
+
+		return $report;
+	}
+}
+
 if ( ! function_exists( 'cw_lumen_lite_performance_diagnose' ) ) {
 	/**
 	 * Builds Lumen Lite's own Theme + Lite diagnosis.

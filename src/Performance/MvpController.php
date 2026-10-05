@@ -504,7 +504,7 @@ final class MvpController {
 		$view          = in_array( $view, $allowed_views, true ) ? $view : 'summary';
 		$report        = $this->last_report( $this->render_profile );
 		?>
-		<div class="cw-lumen-performance-shell" data-cw-lumen-performance-shell data-cw-performance-active-view="<?php echo esc_attr( $view ); ?>">
+		<div class="cw-lumen-performance-shell cw-lumen-ui-tool cw-lumen-ui-tool--performance" data-cw-lumen-performance-shell data-cw-performance-active-view="<?php echo esc_attr( $view ); ?>">
 			<?php $this->render_intro( $report ); ?>
 			<?php $this->render_analysis_form( $report ); ?>
 			<?php $this->render_views( $view ); ?>
@@ -1359,13 +1359,17 @@ final class MvpController {
 				continue;
 			}
 
+			$path = strtolower( (string) wp_parse_url( $url, PHP_URL_PATH ) );
+			if ( ! str_ends_with( $path, '.css' ) && ! str_ends_with( $path, '.js' ) ) {
+				continue;
+			}
+
 			++$summary['resource_count'];
 			$summary['available']      = true;
 			$summary['transfer_bytes'] += (int) ( $item['transferSize'] ?? 0 );
 			$summary['encoded_bytes']  += (int) ( $item['encodedBodySize'] ?? 0 );
 			$summary['decoded_bytes']  += (int) ( $item['decodedBodySize'] ?? 0 );
 
-			$path = strtolower( (string) wp_parse_url( $url, PHP_URL_PATH ) );
 			if ( str_ends_with( $path, '.css' ) ) {
 				$summary['css_transfer_bytes'] += (int) ( $item['transferSize'] ?? 0 );
 			} elseif ( str_ends_with( $path, '.js' ) ) {
@@ -1637,6 +1641,8 @@ final class MvpController {
 			<?php foreach ( $items as $item ) : ?>
 				<?php
 				$provider   = (string) ( $item['provider'] ?? '' );
+				$type       = (string) ( $item['type'] ?? '' );
+				$type_label = 'style' === $type ? __( 'CSS', 'creceweb-lumen-lite' ) : ( 'script' === $type ? __( 'JavaScript', 'creceweb-lumen-lite' ) : '' );
 				$size       = max( 0, (int) ( $item['size_bytes'] ?? 0 ) );
 				$share      = $payload_bytes > 0 ? min( 100, max( 0, ( $size / $payload_bytes ) * 100 ) ) : 0;
 				$share_band = $share >= 50 ? 'dominant' : ( $share >= 25 ? 'high' : ( $share >= 10 ? 'medium' : 'low' ) );
@@ -1645,7 +1651,7 @@ final class MvpController {
 					<div class="cw-lumen-performance__contributor-meta">
 						<div>
 							<strong><?php echo esc_html( $this->module_label( (string) ( $item['module'] ?? '' ), $provider ) ); ?></strong>
-							<span><?php echo esc_html( $this->provider_label( $provider ) ); ?></span>
+							<span><?php echo esc_html( $this->provider_label( $provider ) ); ?><?php if ( '' !== $type_label ) : ?> · <span class="cw-lumen-performance__contributor-type"><?php echo esc_html( $type_label ); ?></span><?php endif; ?></span>
 						</div>
 						<div class="cw-lumen-performance__contributor-value">
 							<strong><?php echo esc_html( $this->format_bytes( $size ) ); ?></strong>
@@ -2134,7 +2140,9 @@ final class MvpController {
 			'table_of_contents'  => __( 'Table of contents', 'creceweb-lumen-lite' ),
 			'sharing'            => __( 'Sharing', 'creceweb-lumen-lite' ),
 			'related_content'     => __( 'Related content', 'creceweb-lumen-lite' ),
+			'popular_content'     => __( 'Popular content', 'creceweb-lumen-lite' ),
 			'menu'               => __( 'Menu', 'creceweb-lumen-lite' ),
+			'search_modal'       => __( 'Search modal', 'creceweb-lumen-lite' ),
 			'floating_action'    => __( 'Floating action', 'creceweb-lumen-lite' ),
 			'messaging'          => __( 'Messaging', 'creceweb-lumen-lite' ),
 			'admin'              => __( 'Administration', 'creceweb-lumen-lite' ),
@@ -2455,12 +2463,17 @@ final class MvpController {
 			$url = \CreceWeb\Lumen\get_admin_section_url( 'theme' );
 		} elseif ( 'creceweb-lumen-lite' === $provider ) {
 			$section = array(
+				'library'         => 'lite-site-kits',
+				'posts_grid'      => 'lite-content',
+				'color_mode'      => 'lite-color-mode',
 				'content'         => 'lite-content',
 				'reading_progress' => 'lite-content',
 				'table_of_contents' => 'lite-content',
 				'sharing'           => 'lite-content',
 				'related_content'    => 'lite-content',
+				'popular_content'    => 'lite-content',
 				'menu'            => 'lite-menu',
+				'search_modal'    => 'lite-menu',
 				'floating_action' => 'lite-floating-action',
 				'messaging'       => 'lite-messaging',
 			)[ $module ] ?? '';
@@ -2472,6 +2485,9 @@ final class MvpController {
 						array( 'page' => 'creceweb-lumen-lite', 'tab' => $section ),
 						admin_url( 'themes.php' )
 					);
+			}
+			if ( 'popular_content' === $module && '' !== $url ) {
+				$url = add_query_arg( 'content_view', 'popular-content', $url );
 			}
 		}
 

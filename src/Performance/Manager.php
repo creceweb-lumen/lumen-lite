@@ -44,7 +44,7 @@ final class Manager {
 		$report  = ( new ReportEnricher() )->enrich( $report );
 
 		$report['generated_by'] = 'creceweb-lumen-performance';
-		$report['engine_version'] = '1.3.0';
+		$report['engine_version'] = '1.4.0';
 		$report['notes'] = array(
 			__( 'Inventory bytes are raw packaged file sizes, not compressed transfer sizes.', 'creceweb-lumen-lite' ),
 			__( 'No remote request, database write, cron or persistent frontend instrumentation is performed.', 'creceweb-lumen-lite' ),
@@ -63,7 +63,7 @@ final class Manager {
 	public function diagnose( object $plugin, array $args = array() ): array {
 		$report = $this->analyze_rules( $this->rules( $plugin, $args ), $args );
 		$report['baseline'] = array(
-			'theme' => '1.4.108',
+			'theme' => defined( 'CRECEWEB_LUMEN_VERSION' ) ? (string) CRECEWEB_LUMEN_VERSION : '',
 			'lite'  => defined( 'CRECEWEB_LUMEN_LITE_VERSION' ) ? (string) CRECEWEB_LUMEN_LITE_VERSION : '',
 		);
 
