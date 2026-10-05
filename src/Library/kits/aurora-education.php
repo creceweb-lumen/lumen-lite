@@ -1,0 +1,51 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+return array(
+	'id'          => 'aurora-education',
+	'title'       => __( 'Aurora Education Kit', 'creceweb-lumen-lite' ),
+	'description' => __( 'Nine-page editorial Education Kit with a paper-like visual language, serif headings, indexed content, and Light/Dark modes.', 'creceweb-lumen-lite' ),
+	'use'         => __( 'Use Aurora for a quieter editorial learning experience. Complete pages recommend Lumen: Full width; individual sections never change the current page template.', 'creceweb-lumen-lite' ),
+	'preview_url' => CRECEWEB_LUMEN_LITE_URL . 'assets/images/library-previews/aurora-education-kit-v2.webp',
+	'config_preset' => 'aurora-theme.json',
+	'site_setup' => array(
+		'pages' => array(
+			array( 'key' => 'home', 'item' => 'page-home-education-aurora', 'title' => __( 'Home', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'courses', 'item' => 'page-education-courses-aurora-page', 'title' => __( 'Courses', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'capsules', 'item' => 'page-education-capsules-aurora-page', 'title' => __( 'Capsules', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'resources', 'item' => 'page-education-resources-aurora-page', 'title' => __( 'Resources', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'method', 'item' => 'page-education-method-aurora-page', 'title' => __( 'Method', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'contact', 'item' => 'page-education-contact-aurora-page', 'title' => __( 'Contact', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'course-detail', 'item' => 'page-education-course-detail-aurora-page', 'title' => __( 'AI Without Autopilot', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'capsule-detail', 'item' => 'page-education-capsule-detail-aurora-page', 'title' => __( 'Prompts with Context', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'resource-detail', 'item' => 'page-education-resource-detail-aurora-page', 'title' => __( 'A 30-Day Plan for Using AI with Judgement', 'creceweb-lumen-lite' ) ),
+		),
+		'front_page' => 'home',
+		'menu_name' => __( 'Aurora Education', 'creceweb-lumen-lite' ),
+		'menu_location' => 'primary',
+		'navigation' => array(
+			array( 'page' => 'home' ),
+			array( 'page' => 'courses' ),
+			array( 'page' => 'course-detail', 'parent' => 'courses' ),
+			array( 'page' => 'capsules' ),
+			array( 'page' => 'capsule-detail', 'parent' => 'capsules' ),
+			array( 'page' => 'resources' ),
+			array( 'page' => 'resource-detail', 'parent' => 'resources' ),
+			array( 'page' => 'method' ),
+			array( 'page' => 'contact' ),
+			array( 'label' => __( 'Start', 'creceweb-lumen-lite' ), 'target_page' => 'contact', 'highlight' => true ),
+		),
+	),
+	'items' => array(
+		'page-home-education-aurora',
+		'page-education-courses-aurora-page',
+		'page-education-capsules-aurora-page',
+		'page-education-resources-aurora-page',
+		'page-education-method-aurora-page',
+		'page-education-contact-aurora-page',
+		'page-education-course-detail-aurora-page',
+		'page-education-capsule-detail-aurora-page',
+		'page-education-resource-detail-aurora-page',
+	),
+	'keywords' => array( __( 'education', 'creceweb-lumen-lite' ), __( 'editorial', 'creceweb-lumen-lite' ), __( 'learning', 'creceweb-lumen-lite' ), __( 'Aurora', 'creceweb-lumen-lite' ) ),
+);

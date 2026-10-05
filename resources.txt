@@ -1,17 +1,24 @@
 CreceWeb Lumen Lite bundled resources
 
-Plugin code, interface design, Gutenberg patterns, Library previews, and original visual assets
+Plugin code, interface design, Gutenberg patterns, Site Kits, Library previews, and original visual assets
 Copyright 2026 CreceWeb.
 Source: https://creceweb.com.ar/lumen-lite
 License: GNU General Public License v2 or later.
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Library preview images and pattern media
+Library preview images, Site Kit previews, and pattern media
 Copyright 2026 CreceWeb.
-Source: Created specifically for CreceWeb Lumen Lite from the plugin's own patterns and original geometric artwork.
+Source: Created specifically for CreceWeb Lumen Lite from the plugin's own Gutenberg patterns, Site Kits, demo identities, and original visual artwork.
 License: GNU General Public License v2 or later.
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Note: No stock photographs, third-party artwork, third-party fonts, or official third-party logo files are bundled in these image assets.
+Note: Prisma, Aurora, and Voltio/VoltioLab are fictional demo identities created for the bundled layouts. No stock artwork, third-party fonts, or official third-party logo files are bundled in these assets.
+
+Prisma Site Kit media
+Copyright 2026 CreceWeb.
+Source: Original visual media created specifically for the Prisma Business Site Kit and stored under assets/images/library-kits/prisma/.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Note: These images are bundled local demo media and do not require remote requests.
 
 Inline Messaging provider-identifying SVG glyphs
 Copyright 2026 CreceWeb.
@@ -20,8 +27,30 @@ License: GNU General Public License v2 or later.
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Note: WhatsApp, Telegram, Messenger, Signal, Meta and related marks belong to their respective owners. The glyphs are not used as CreceWeb branding and no affiliation or endorsement is implied.
 
+Color Mode sun/moon SVG glyphs
+Copyright 2026 CreceWeb.
+Source: Original local vector glyphs maintained in src/ColorMode/Controller.php.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
+Search Modal magnifying-glass SVG glyph
+Copyright 2026 CreceWeb.
+Source: Original local vector glyph maintained in src/SearchModal/Controller.php.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+
 Fonts
 No font files or remote font services are bundled or loaded. The plugin uses WordPress/admin/theme typography.
 
+Translations
+English is the plugin source language. Translation catalogs are maintained outside the public plugin package for import/review on translate.wordpress.org. WordPress.org-hosted installations receive available translations through official WordPress language packs.
+
 Third-party libraries
 No third-party JavaScript, CSS, font, icon pack, analytics SDK, social SDK, or remote executable library is bundled by Lumen Lite. WordPress core-provided dependencies are referenced through WordPress APIs and are not redistributed.
+
+Human-readable CSS source copies
+Copyright 2026 CreceWeb.
+Source: source/css/ contains review-friendly formatting of compact production CSS stored under assets/css/.
+License: GNU General Public License v2 or later.
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Note: These source copies are not enqueued at runtime and do not add frontend requests or transfer bytes.

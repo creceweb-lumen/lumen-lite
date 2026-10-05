@@ -115,6 +115,7 @@ final class Catalog {
 				'pattern_name' => $pattern_name,
 				'preview_url'  => isset( $item['preview_url'] ) ? esc_url_raw( (string) $item['preview_url'] ) : '',
 				'keywords'     => $keywords,
+				'template'     => 'page' === $type && isset( $item['template'] ) ? sanitize_text_field( (string) $item['template'] ) : '',
 				'source'       => $source,
 				'source_label' => isset( $item['source_label'] ) ? sanitize_text_field( (string) $item['source_label'] ) : '',
 			);

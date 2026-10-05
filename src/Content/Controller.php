@@ -383,6 +383,59 @@ final class Controller {
 		return array( $width, $height );
 	}
 
+	/**
+	 * Resolves a Popular Content image-ratio shortcut without restricting custom ratios.
+	 *
+	 * @param array<string,mixed> $popular_content Submitted Popular Content values.
+	 * @return array{0:float,1:float}
+	 */
+	private static function resolve_popular_image_ratio( array $popular_content ): array {
+		$preset = is_scalar( $popular_content['image_ratio_preset'] ?? null ) ? sanitize_text_field( (string) $popular_content['image_ratio_preset'] ) : 'custom';
+		$presets = array(
+			'16:9' => array( 16.0, 9.0 ),
+			'4:3'  => array( 4.0, 3.0 ),
+			'3:2'  => array( 3.0, 2.0 ),
+			'1:1'  => array( 1.0, 1.0 ),
+			'9:16' => array( 9.0, 16.0 ),
+		);
+
+		if ( isset( $presets[ $preset ] ) ) {
+			return $presets[ $preset ];
+		}
+
+		$width = isset( $popular_content['image_ratio_width'] ) && is_numeric( $popular_content['image_ratio_width'] ) && is_finite( (float) $popular_content['image_ratio_width'] ) && (float) $popular_content['image_ratio_width'] > 0 ? (float) $popular_content['image_ratio_width'] : 16.0;
+		$height = isset( $popular_content['image_ratio_height'] ) && is_numeric( $popular_content['image_ratio_height'] ) && is_finite( (float) $popular_content['image_ratio_height'] ) && (float) $popular_content['image_ratio_height'] > 0 ? (float) $popular_content['image_ratio_height'] : 9.0;
+
+		return array( $width, $height );
+	}
+
+
+	/**
+	 * Resolves a Posts Grid image-ratio shortcut without restricting custom ratios.
+	 *
+	 * @param array<string,mixed> $posts_grid Submitted Posts Grid values.
+	 * @return array{0:float,1:float}
+	 */
+	private static function resolve_posts_grid_image_ratio( array $posts_grid ): array {
+		$preset = is_scalar( $posts_grid['image_ratio_preset'] ?? null ) ? sanitize_text_field( (string) $posts_grid['image_ratio_preset'] ) : 'custom';
+		$presets = array(
+			'16:9' => array( 16.0, 9.0 ),
+			'4:3'  => array( 4.0, 3.0 ),
+			'3:2'  => array( 3.0, 2.0 ),
+			'1:1'  => array( 1.0, 1.0 ),
+			'9:16' => array( 9.0, 16.0 ),
+		);
+
+		if ( isset( $presets[ $preset ] ) ) {
+			return $presets[ $preset ];
+		}
+
+		$width = isset( $posts_grid['image_ratio_width'] ) && is_numeric( $posts_grid['image_ratio_width'] ) && is_finite( (float) $posts_grid['image_ratio_width'] ) && (float) $posts_grid['image_ratio_width'] > 0 ? (float) $posts_grid['image_ratio_width'] : 16.0;
+		$height = isset( $posts_grid['image_ratio_height'] ) && is_numeric( $posts_grid['image_ratio_height'] ) && is_finite( (float) $posts_grid['image_ratio_height'] ) && (float) $posts_grid['image_ratio_height'] > 0 ? (float) $posts_grid['image_ratio_height'] : 9.0;
+
+		return array( $width, $height );
+	}
+
 	/** @return void */
 	public function handle_save(): void {
 		if ( ! current_user_can( 'edit_theme_options' ) ) {
@@ -402,6 +455,22 @@ final class Controller {
 				'reading_time_enabled'   => isset( $_POST['reading_time_enabled'] ),
 				'excerpt_length_enabled' => isset( $_POST['excerpt_length_enabled'] ),
 				'excerpt_length'         => $excerpt_length,
+			)
+		);
+
+		$breadcrumbs = isset( $_POST['breadcrumbs'] ) && is_array( $_POST['breadcrumbs'] )
+			? wp_unslash( $_POST['breadcrumbs'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nested values are sanitized before persistence below.
+			: array();
+		Settings::update_breadcrumbs(
+			array(
+				'enabled'          => ! empty( $breadcrumbs['enabled'] ),
+				'home_label'       => sanitize_text_field( (string) ( $breadcrumbs['home_label'] ?? __( 'Home', 'creceweb-lumen-lite' ) ) ),
+				'separator'        => sanitize_text_field( (string) ( $breadcrumbs['separator'] ?? '›' ) ),
+				'background_style' => sanitize_key( (string) ( $breadcrumbs['background_style'] ?? 'auto' ) ),
+				'show_border'      => ! empty( $breadcrumbs['show_border'] ),
+				'show_home'        => ! empty( $breadcrumbs['show_home'] ),
+				'show_current'     => ! empty( $breadcrumbs['show_current'] ),
+				'schema_enabled'   => ! empty( $breadcrumbs['schema_enabled'] ),
 			)
 		);
 
@@ -526,8 +595,102 @@ final class Controller {
 			)
 		);
 
+		$popular_content = isset( $_POST['popular_content'] ) && is_array( $_POST['popular_content'] )
+			? wp_unslash( $_POST['popular_content'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Each nested value is sanitized/validated below before Settings persists it.
+			: array();
+		$popular_content_types = isset( $popular_content['content_types'] ) && is_array( $popular_content['content_types'] )
+			? array_values( array_unique( array_diff( array_filter( array_map( 'sanitize_key', $popular_content['content_types'] ) ), array( 'attachment' ) ) ) )
+			: array();
+		$popular_manual_raw = is_scalar( $popular_content['manual_ids_text'] ?? null ) ? (string) $popular_content['manual_ids_text'] : '';
+		$popular_manual_ids = array_values( array_unique( array_filter( array_map( 'absint', preg_split( '/[^0-9]+/', $popular_manual_raw ) ?: array() ) ) ) );
+		$popular_term_ids = isset( $popular_content['term_ids'] ) && is_array( $popular_content['term_ids'] )
+			? array_values( array_unique( array_filter( array_map( 'absint', $popular_content['term_ids'] ) ) ) )
+			: array();
+		$popular_devices = isset( $popular_content['devices'] ) && is_array( $popular_content['devices'] ) ? $popular_content['devices'] : array();
+		$popular_device_flags = array(
+			'desktop' => ! empty( $popular_devices['desktop'] ),
+			'tablet'  => ! empty( $popular_devices['tablet'] ),
+			'mobile'  => ! empty( $popular_devices['mobile'] ),
+		);
+		$popular_card_style = sanitize_key( is_scalar( $popular_content['card_style'] ?? null ) ? (string) $popular_content['card_style'] : 'default' );
+		if ( ! in_array( $popular_card_style, array( 'default', 'elevated', 'minimal' ), true ) ) {
+			$popular_card_style = 'default';
+		}
+		$popular_card_gap = '';
+		if ( isset( $popular_content['card_gap'] ) && is_scalar( $popular_content['card_gap'] ) && '' !== trim( (string) $popular_content['card_gap'] ) && is_numeric( $popular_content['card_gap'] ) && is_finite( (float) $popular_content['card_gap'] ) ) {
+			$popular_card_gap = max( 0, (float) $popular_content['card_gap'] );
+		}
+		$popular_image_ratio = self::resolve_popular_image_ratio( $popular_content );
+
+		Settings::update_popular_content(
+			array(
+				'enabled'            => ! empty( $popular_content['enabled'] ),
+				'title'              => sanitize_text_field( (string) ( $popular_content['title'] ?? '' ) ),
+				'selection_mode'     => sanitize_key( (string) ( $popular_content['selection_mode'] ?? 'automatic' ) ),
+				'items'              => max( 1, absint( $popular_content['items'] ?? 4 ) ),
+				'period'             => sanitize_key( (string) ( $popular_content['period'] ?? 'all' ) ),
+				'content_types'      => $popular_content_types,
+				'manual_ids'         => $popular_manual_ids,
+				'taxonomy'           => sanitize_key( (string) ( $popular_content['taxonomy'] ?? '' ) ),
+				'term_ids'           => $popular_term_ids,
+				'singular_position'  => sanitize_key( (string) ( $popular_content['singular_position'] ?? 'after' ) ),
+				'show_on_singular'   => ! empty( $popular_content['show_on_singular'] ),
+				'devices'            => $popular_device_flags,
+				'show_image'         => ! empty( $popular_content['show_image'] ),
+				'show_taxonomy'      => ! empty( $popular_content['show_taxonomy'] ),
+				'show_date'          => ! empty( $popular_content['show_date'] ),
+				'show_excerpt'       => ! empty( $popular_content['show_excerpt'] ),
+				'columns_desktop'    => max( 1, absint( $popular_content['columns_desktop'] ?? 4 ) ),
+				'columns_tablet'     => max( 1, absint( $popular_content['columns_tablet'] ?? 2 ) ),
+				'columns_mobile'     => max( 1, absint( $popular_content['columns_mobile'] ?? 1 ) ),
+				'image_ratio_width'  => $popular_image_ratio[0],
+				'image_ratio_height' => $popular_image_ratio[1],
+				'card_gap'           => $popular_card_gap,
+				'card_style'         => $popular_card_style,
+			)
+		);
+
+		$posts_grid = isset( $_POST['posts_grid'] ) && is_array( $_POST['posts_grid'] )
+			? wp_unslash( $_POST['posts_grid'] ) // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- Nested values normalized by Settings/PostsGrid Config.
+			: array();
+		$posts_grid_manual_raw = is_scalar( $posts_grid['manual_ids_text'] ?? null ) ? (string) $posts_grid['manual_ids_text'] : '';
+		$posts_grid_manual_ids = array_values( array_unique( array_filter( array_map( 'absint', preg_split( '/[^0-9]+/', $posts_grid_manual_raw ) ?: array() ) ) ) );
+		$posts_grid_term_ids = isset( $posts_grid['term_ids'] ) && is_array( $posts_grid['term_ids'] ) ? array_values( array_unique( array_filter( array_map( 'absint', $posts_grid['term_ids'] ) ) ) ) : array();
+		$posts_grid_devices = isset( $posts_grid['devices'] ) && is_array( $posts_grid['devices'] ) ? $posts_grid['devices'] : array();
+		$posts_grid_image_ratio = self::resolve_posts_grid_image_ratio( $posts_grid );
+		Settings::update_posts_grid(
+			array(
+				'title' => sanitize_text_field( (string) ( $posts_grid['title'] ?? '' ) ),
+				'post_type' => sanitize_key( (string) ( $posts_grid['post_type'] ?? 'post' ) ),
+				'source' => sanitize_key( (string) ( $posts_grid['source'] ?? 'latest' ) ),
+				'items_desktop' => max( 1, absint( $posts_grid['items_desktop'] ?? 6 ) ),
+				'items_tablet' => max( 1, absint( $posts_grid['items_tablet'] ?? 4 ) ),
+				'items_mobile' => max( 1, absint( $posts_grid['items_mobile'] ?? 3 ) ),
+				'orderby' => sanitize_key( (string) ( $posts_grid['orderby'] ?? 'date' ) ),
+				'order' => strtoupper( sanitize_text_field( (string) ( $posts_grid['order'] ?? 'DESC' ) ) ),
+				'taxonomy' => sanitize_key( (string) ( $posts_grid['taxonomy'] ?? '' ) ),
+				'term_ids' => $posts_grid_term_ids,
+				'manual_ids' => $posts_grid_manual_ids,
+				'show_image' => ! empty( $posts_grid['show_image'] ),
+				'show_taxonomy' => ! empty( $posts_grid['show_taxonomy'] ),
+				'show_date' => ! empty( $posts_grid['show_date'] ),
+				'show_excerpt' => ! empty( $posts_grid['show_excerpt'] ),
+				'show_read_more' => ! empty( $posts_grid['show_read_more'] ),
+				'read_more_text' => sanitize_text_field( (string) ( $posts_grid['read_more_text'] ?? __( 'Read more', 'creceweb-lumen-lite' ) ) ),
+				'layout' => sanitize_key( (string) ( $posts_grid['layout'] ?? 'grid' ) ),
+				'columns_desktop' => max( 1, absint( $posts_grid['columns_desktop'] ?? 3 ) ),
+				'columns_tablet' => max( 1, absint( $posts_grid['columns_tablet'] ?? 2 ) ),
+				'columns_mobile' => max( 1, absint( $posts_grid['columns_mobile'] ?? 1 ) ),
+				'image_ratio_width' => $posts_grid_image_ratio[0],
+				'image_ratio_height' => $posts_grid_image_ratio[1],
+				'gap' => isset( $posts_grid['gap'] ) && is_numeric( $posts_grid['gap'] ) ? max( 0, (float) $posts_grid['gap'] ) : '',
+				'style' => sanitize_key( (string) ( $posts_grid['style'] ?? 'default' ) ),
+				'devices' => array( 'desktop'=>! empty( $posts_grid_devices['desktop'] ), 'tablet'=>! empty( $posts_grid_devices['tablet'] ), 'mobile'=>! empty( $posts_grid_devices['mobile'] ) ),
+			)
+		);
+
 		$content_view = isset( $_POST['cw_lumen_lite_content_view'] ) ? sanitize_key( wp_unslash( (string) $_POST['cw_lumen_lite_content_view'] ) ) : '';
-		if ( in_array( $content_view, array( 'general', 'reading-progress', 'table-of-contents', 'sharing', 'related-content' ), true ) ) {
+		if ( in_array( $content_view, array( 'general', 'breadcrumbs', 'reading-progress', 'table-of-contents', 'sharing', 'related-content', 'popular-content', 'posts-grid' ), true ) ) {
 			$return_url = add_query_arg( 'content_view', $content_view, $return_url );
 		}
 

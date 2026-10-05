@@ -53,6 +53,7 @@ final class PageCatalog {
 			$definition['slug']        = $slug;
 			$definition['title']       = sanitize_text_field( (string) ( $definition['title'] ?? $slug ) );
 			$definition['description'] = sanitize_text_field( (string) ( $definition['description'] ?? '' ) );
+			$definition['template']    = isset( $definition['template'] ) ? sanitize_text_field( (string) $definition['template'] ) : '';
 			$definition['keywords']    = isset( $definition['keywords'] ) && is_array( $definition['keywords'] )
 				? array_values( array_filter( array_map( 'sanitize_text_field', $definition['keywords'] ) ) )
 				: array();

@@ -7,6 +7,8 @@
 
 namespace CreceWeb\LumenLite\Data;
 
+use CreceWeb\LumenLite\PostsGrid\Config as PostsGridConfig;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -16,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 final class Settings {
 	public const OPTION_KEY = 'cw_lumen_lite_settings';
-	public const SCHEMA = 23;
+	public const SCHEMA = 32;
 
 	/** @var array<string,mixed>|null Request-local normalized settings cache. */
 	private static ?array $cache = null;
@@ -31,7 +33,12 @@ final class Settings {
 		$existing = get_option( self::OPTION_KEY, false );
 
 		if ( false === $existing ) {
-			add_option( self::OPTION_KEY, self::defaults(), '', 'no' );
+			$defaults = self::defaults();
+			// A missing option can mean an interrupted/duplicate uninstall. Rebuild
+			// derived menu state once from the surviving nav-menu item metadata.
+			$defaults['menu_customizations_needs_reindex'] = true;
+			add_option( self::OPTION_KEY, $defaults, '', 'no' );
+			self::$cache = null;
 			return;
 		}
 
@@ -54,11 +61,17 @@ final class Settings {
 			return self::$cache;
 		}
 
-		$value = get_option( self::OPTION_KEY, array() );
-		$value = is_array( $value ) ? $value : array();
-		$value = self::migrate( $value );
+		$stored  = get_option( self::OPTION_KEY, false );
+		$missing = false === $stored;
+		$value   = is_array( $stored ) ? $stored : array();
+		$value   = self::migrate( $value );
+		$value   = wp_parse_args( $value, self::defaults() );
 
-		self::$cache = self::sanitize( wp_parse_args( $value, self::defaults() ) );
+		if ( $missing ) {
+			$value['menu_customizations_needs_reindex'] = true;
+		}
+
+		self::$cache = self::sanitize( $value );
 
 		return self::$cache;
 	}
@@ -89,7 +102,8 @@ final class Settings {
 	 */
 	public static function update_menu_item_customizations( bool $has_custom_items ): void {
 		$settings = self::get();
-		$settings['menu_has_item_customizations'] = $has_custom_items;
+		$settings['menu_has_item_customizations']   = $has_custom_items;
+		$settings['menu_customizations_needs_reindex'] = false;
 		self::update( $settings );
 	}
 
@@ -101,6 +115,16 @@ final class Settings {
 	public static function update_content( array $content ): void {
 		$settings = self::get();
 		$settings['content'] = $content;
+		self::update( $settings );
+	}
+
+	/**
+	 * @param array<string,mixed> $breadcrumbs Breadcrumb preferences.
+	 * @return void
+	 */
+	public static function update_breadcrumbs( array $breadcrumbs ): void {
+		$settings = self::get();
+		$settings['breadcrumbs'] = $breadcrumbs;
 		self::update( $settings );
 	}
 
@@ -142,6 +166,45 @@ final class Settings {
 	public static function update_related_content( array $related_content ): void {
 		$settings = self::get();
 		$settings['related_content'] = $related_content;
+		self::update( $settings );
+	}
+
+
+	/**
+	 * @param array<string,mixed> $popular_content Popular-content preferences.
+	 * @return void
+	 */
+	public static function update_popular_content( array $popular_content ): void {
+		$settings = self::get();
+		$settings['popular_content'] = $popular_content;
+		self::update( $settings );
+		do_action( 'creceweb_lumen_lite_popular_content_settings_updated' );
+	}
+
+	/** @param array<string,mixed> $posts_grid Posts Grid defaults. @return void */
+	public static function update_posts_grid( array $posts_grid ): void {
+		$settings = self::get();
+		$settings['posts_grid'] = $posts_grid;
+		self::update( $settings );
+	}
+
+	/**
+	 * @param array<string,mixed> $color_mode Color-mode preferences.
+	 * @return void
+	 */
+	public static function update_color_mode( array $color_mode ): void {
+		$settings = self::get();
+		$settings['color_mode'] = $color_mode;
+		self::update( $settings );
+	}
+
+	/**
+	 * @param array<string,mixed> $search_modal Search-modal preferences.
+	 * @return void
+	 */
+	public static function update_search_modal( array $search_modal ): void {
+		$settings = self::get();
+		$settings['search_modal'] = $search_modal;
 		self::update( $settings );
 	}
 
@@ -302,11 +365,22 @@ final class Settings {
 			'installed_version'              => CRECEWEB_LUMEN_LITE_VERSION,
 			'onboarding_dismissed'           => false,
 			'footer_credit_text'             => self::default_footer_credit(),
-			'menu_has_item_customizations'   => false,
+			'menu_has_item_customizations'      => false,
+			'menu_customizations_needs_reindex' => false,
 			'content'                        => array(
 				'reading_time_enabled'   => false,
 				'excerpt_length_enabled' => false,
 				'excerpt_length'         => 30,
+			),
+			'breadcrumbs'                    => array(
+				'enabled'          => false,
+				'home_label'       => __( 'Home', 'creceweb-lumen-lite' ),
+				'separator'        => '›',
+				'background_style' => 'auto',
+				'show_border'      => true,
+				'show_home'        => true,
+				'show_current'     => true,
+				'schema_enabled'   => true,
 			),
 			'reading_progress'               => array(
 				'enabled'    => false,
@@ -374,6 +448,63 @@ final class Settings {
 				'show_excerpt'       => true,
 				'show_date'          => false,
 				'post_types'         => self::default_related_post_types(),
+			),
+			'popular_content'                => array(
+				'enabled'            => false,
+				'title'              => __( 'Popular content', 'creceweb-lumen-lite' ),
+				'selection_mode'     => 'automatic',
+				'items'              => 4,
+				'period'             => 'all',
+				'content_types'      => array_values( array_diff( self::default_public_post_types(), array( 'attachment' ) ) ),
+				'manual_ids'         => array(),
+				'taxonomy'           => '',
+				'term_ids'           => array(),
+				'singular_position'  => 'after',
+				'show_on_singular'   => true,
+				'devices'            => array(
+					'desktop' => true,
+					'tablet'  => true,
+					'mobile'  => true,
+				),
+				'show_image'         => true,
+				'show_taxonomy'      => true,
+				'show_date'          => false,
+				'show_excerpt'       => false,
+				'columns_desktop'    => 4,
+				'columns_tablet'     => 2,
+				'columns_mobile'     => 1,
+				'image_ratio_width'  => 16.0,
+				'image_ratio_height' => 9.0,
+				'card_gap'           => '',
+				'card_style'         => 'default',
+			),
+			'posts_grid'                     => PostsGridConfig::defaults(),
+			'color_mode'                     => array(
+				'enabled'      => false,
+				'default_mode' => 'system',
+				'show_switch'      => true,
+				'show_menu_switch' => false,
+				'position'     => 'left',
+				'devices'      => array(
+					'desktop' => true,
+					'tablet'  => true,
+					'mobile'  => true,
+				),
+				'palette'      => array(
+					'primary'    => '#334155',
+					'accent'     => '#34d399',
+					'background' => '#0f172a',
+					'surface'    => '#111827',
+					'text'       => '#e5e7eb',
+					'heading'    => '#f8fafc',
+					'link'       => '#6ee7b7',
+					'border'     => '#334155',
+				),
+			),
+			'search_modal'                   => array(
+				'enabled'           => false,
+				'show_menu_trigger' => true,
+				'placeholder'       => __( 'Search…', 'creceweb-lumen-lite' ),
 			),
 			'floating_action'                => array(
 				'enabled'         => false,
@@ -472,6 +603,17 @@ final class Settings {
 		$content = isset( $value['content'] ) && is_array( $value['content'] ) ? $value['content'] : array();
 		$excerpt_length = max( 1, absint( $content['excerpt_length'] ?? 30 ) );
 
+		$breadcrumbs = isset( $value['breadcrumbs'] ) && is_array( $value['breadcrumbs'] ) ? $value['breadcrumbs'] : array();
+		$breadcrumbs_home_label = sanitize_text_field( (string) ( $breadcrumbs['home_label'] ?? __( 'Home', 'creceweb-lumen-lite' ) ) );
+		if ( '' === trim( $breadcrumbs_home_label ) ) {
+			$breadcrumbs_home_label = __( 'Home', 'creceweb-lumen-lite' );
+		}
+		$breadcrumbs_separator = sanitize_text_field( (string) ( $breadcrumbs['separator'] ?? '›' ) );
+		$breadcrumbs_background_style = sanitize_key( (string) ( $breadcrumbs['background_style'] ?? 'auto' ) );
+		if ( ! in_array( $breadcrumbs_background_style, array( 'auto', 'surface', 'background' ), true ) ) {
+			$breadcrumbs_background_style = 'auto';
+		}
+
 		$reading_progress = isset( $value['reading_progress'] ) && is_array( $value['reading_progress'] ) ? $value['reading_progress'] : array();
 		$reading_progress_position = sanitize_key( (string) ( $reading_progress['position'] ?? 'top' ) );
 		if ( ! in_array( $reading_progress_position, array( 'top', 'bottom' ), true ) ) {
@@ -558,6 +700,112 @@ final class Settings {
 		if ( ! in_array( $related_card_style, array( 'default', 'elevated', 'minimal' ), true ) ) {
 			$related_card_style = 'default';
 		}
+
+		$popular_content = isset( $value['popular_content'] ) && is_array( $value['popular_content'] ) ? $value['popular_content'] : array();
+		$popular_selection_mode = sanitize_key( (string) ( $popular_content['selection_mode'] ?? 'automatic' ) );
+		if ( ! in_array( $popular_selection_mode, array( 'automatic', 'manual' ), true ) ) {
+			$popular_selection_mode = 'automatic';
+		}
+		$popular_period = sanitize_key( (string) ( $popular_content['period'] ?? 'all' ) );
+		if ( ! in_array( $popular_period, array( 'all', '24h', '7d', '30d' ), true ) ) {
+			$popular_period = 'all';
+		}
+		$popular_content_types = isset( $popular_content['content_types'] ) && is_array( $popular_content['content_types'] )
+			? array_values( array_unique( array_diff( array_filter( array_map( 'sanitize_key', $popular_content['content_types'] ) ), array( 'attachment' ) ) ) )
+			: array_values( array_diff( self::default_public_post_types(), array( 'attachment' ) ) );
+		$popular_manual_ids = isset( $popular_content['manual_ids'] ) && is_array( $popular_content['manual_ids'] )
+			? array_values( array_unique( array_filter( array_map( 'absint', $popular_content['manual_ids'] ) ) ) )
+			: array();
+		$popular_taxonomy = sanitize_key( (string) ( $popular_content['taxonomy'] ?? '' ) );
+		$popular_term_ids = isset( $popular_content['term_ids'] ) && is_array( $popular_content['term_ids'] )
+			? array_values( array_unique( array_filter( array_map( 'absint', $popular_content['term_ids'] ) ) ) )
+			: array();
+		if ( '' !== $popular_taxonomy && function_exists( 'get_taxonomy' ) ) {
+			$taxonomy_object = get_taxonomy( $popular_taxonomy );
+			$taxonomy_types  = is_object( $taxonomy_object ) && isset( $taxonomy_object->object_type ) && is_array( $taxonomy_object->object_type )
+				? array_map( 'sanitize_key', $taxonomy_object->object_type )
+				: array();
+			if ( ! is_object( $taxonomy_object ) || empty( $taxonomy_object->public ) || empty( array_intersect( $popular_content_types, $taxonomy_types ) ) ) {
+				$popular_taxonomy = '';
+				$popular_term_ids = array();
+			} elseif ( function_exists( 'term_exists' ) ) {
+				$popular_term_ids = array_values(
+					array_filter(
+						$popular_term_ids,
+						static function ( int $term_id ) use ( $popular_taxonomy ): bool {
+							$exists = term_exists( $term_id, $popular_taxonomy );
+							return null !== $exists && false !== $exists;
+						}
+					)
+				);
+			}
+		}
+		$popular_position = sanitize_key( (string) ( $popular_content['singular_position'] ?? 'after' ) );
+		if ( ! in_array( $popular_position, array( 'before', 'after' ), true ) ) {
+			$popular_position = 'after';
+		}
+		$popular_devices = isset( $popular_content['devices'] ) && is_array( $popular_content['devices'] ) ? $popular_content['devices'] : null;
+		$popular_device_flags = null === $popular_devices
+			? array( 'desktop' => true, 'tablet' => true, 'mobile' => true )
+			: array(
+				'desktop' => ! empty( $popular_devices['desktop'] ),
+				'tablet'  => ! empty( $popular_devices['tablet'] ),
+				'mobile'  => ! empty( $popular_devices['mobile'] ),
+			);
+		$popular_columns_desktop = max( 1, absint( $popular_content['columns_desktop'] ?? 4 ) );
+		$popular_columns_tablet  = max( 1, absint( $popular_content['columns_tablet'] ?? 2 ) );
+		$popular_columns_mobile  = max( 1, absint( $popular_content['columns_mobile'] ?? 1 ) );
+		$popular_ratio_width     = isset( $popular_content['image_ratio_width'] ) && is_numeric( $popular_content['image_ratio_width'] ) && is_finite( (float) $popular_content['image_ratio_width'] ) && (float) $popular_content['image_ratio_width'] > 0 ? (float) $popular_content['image_ratio_width'] : 16.0;
+		$popular_ratio_height    = isset( $popular_content['image_ratio_height'] ) && is_numeric( $popular_content['image_ratio_height'] ) && is_finite( (float) $popular_content['image_ratio_height'] ) && (float) $popular_content['image_ratio_height'] > 0 ? (float) $popular_content['image_ratio_height'] : 9.0;
+		$popular_card_gap        = '';
+		if ( isset( $popular_content['card_gap'] ) && is_scalar( $popular_content['card_gap'] ) && '' !== trim( (string) $popular_content['card_gap'] ) && is_numeric( $popular_content['card_gap'] ) && is_finite( (float) $popular_content['card_gap'] ) ) {
+			$popular_card_gap = max( 0, (float) $popular_content['card_gap'] );
+		}
+		$popular_card_style = sanitize_key( is_scalar( $popular_content['card_style'] ?? null ) ? (string) $popular_content['card_style'] : 'default' );
+		if ( ! in_array( $popular_card_style, array( 'default', 'elevated', 'minimal' ), true ) ) {
+			$popular_card_style = 'default';
+		}
+
+		$posts_grid = PostsGridConfig::normalize( isset( $value['posts_grid'] ) && is_array( $value['posts_grid'] ) ? $value['posts_grid'] : array() );
+
+		$color_mode = isset( $value['color_mode'] ) && is_array( $value['color_mode'] ) ? $value['color_mode'] : array();
+		$color_mode_default = sanitize_key( (string) ( $color_mode['default_mode'] ?? 'system' ) );
+		if ( ! in_array( $color_mode_default, array( 'light', 'dark', 'system' ), true ) ) {
+			$color_mode_default = 'system';
+		}
+		$color_mode_position = sanitize_key( (string) ( $color_mode['position'] ?? 'left' ) );
+		if ( ! in_array( $color_mode_position, array( 'left', 'right' ), true ) ) {
+			$color_mode_position = 'left';
+		}
+		$color_mode_devices = isset( $color_mode['devices'] ) && is_array( $color_mode['devices'] ) ? $color_mode['devices'] : null;
+		$color_mode_device_flags = null === $color_mode_devices
+			? array( 'desktop' => true, 'tablet' => true, 'mobile' => true )
+			: array(
+				'desktop' => ! empty( $color_mode_devices['desktop'] ),
+				'tablet'  => ! empty( $color_mode_devices['tablet'] ),
+				'mobile'  => ! empty( $color_mode_devices['mobile'] ),
+			);
+		$color_mode_palette_input = isset( $color_mode['palette'] ) && is_array( $color_mode['palette'] ) ? $color_mode['palette'] : array();
+		$color_mode_palette_defaults = array(
+			'primary'    => '#334155',
+			'accent'     => '#34d399',
+			'background' => '#0f172a',
+			'surface'    => '#111827',
+			'text'       => '#e5e7eb',
+			'heading'    => '#f8fafc',
+			'link'       => '#6ee7b7',
+			'border'     => '#334155',
+		);
+		$color_mode_palette = array();
+		foreach ( $color_mode_palette_defaults as $color_key => $color_default ) {
+			$color_value = sanitize_hex_color( (string) ( $color_mode_palette_input[ $color_key ] ?? $color_default ) );
+			$color_mode_palette[ $color_key ] = $color_value ? strtolower( $color_value ) : $color_default;
+		}
+
+		$search_modal = isset( $value['search_modal'] ) && is_array( $value['search_modal'] ) ? $value['search_modal'] : array();
+		$search_placeholder = array_key_exists( 'placeholder', $search_modal )
+			? sanitize_text_field( (string) $search_modal['placeholder'] )
+			: __( 'Search…', 'creceweb-lumen-lite' );
 
 		$floating_action = isset( $value['floating_action'] ) && is_array( $value['floating_action'] ) ? $value['floating_action'] : array();
 		$floating_action_type = sanitize_key( (string) ( $floating_action['action'] ?? 'element' ) );
@@ -661,11 +909,22 @@ final class Settings {
 			'installed_version'            => CRECEWEB_LUMEN_LITE_VERSION,
 			'onboarding_dismissed'         => ! empty( $value['onboarding_dismissed'] ),
 			'footer_credit_text'           => $footer_credit,
-			'menu_has_item_customizations' => ! empty( $value['menu_has_item_customizations'] ),
+			'menu_has_item_customizations'      => ! empty( $value['menu_has_item_customizations'] ),
+			'menu_customizations_needs_reindex' => ! empty( $value['menu_customizations_needs_reindex'] ),
 			'content'                      => array(
 				'reading_time_enabled'   => ! empty( $content['reading_time_enabled'] ),
 				'excerpt_length_enabled' => ! empty( $content['excerpt_length_enabled'] ),
 				'excerpt_length'         => $excerpt_length,
+			),
+			'breadcrumbs'                  => array(
+				'enabled'          => ! empty( $breadcrumbs['enabled'] ),
+				'home_label'       => $breadcrumbs_home_label,
+				'separator'        => $breadcrumbs_separator,
+				'background_style' => $breadcrumbs_background_style,
+				'show_border'      => ! array_key_exists( 'show_border', $breadcrumbs ) || ! empty( $breadcrumbs['show_border'] ),
+				'show_home'        => ! empty( $breadcrumbs['show_home'] ),
+				'show_current'     => ! empty( $breadcrumbs['show_current'] ),
+				'schema_enabled'   => ! empty( $breadcrumbs['schema_enabled'] ),
 			),
 			'reading_progress'             => array(
 				'enabled'    => ! empty( $reading_progress['enabled'] ),
@@ -723,6 +982,46 @@ final class Settings {
 				'show_excerpt'       => ! empty( $related_content['show_excerpt'] ),
 				'show_date'          => ! empty( $related_content['show_date'] ),
 				'post_types'         => $related_post_types,
+			),
+			'popular_content'              => array(
+				'enabled'            => ! empty( $popular_content['enabled'] ),
+				'title'              => sanitize_text_field( (string) ( $popular_content['title'] ?? __( 'Popular content', 'creceweb-lumen-lite' ) ) ),
+				'selection_mode'     => $popular_selection_mode,
+				'items'              => max( 1, absint( $popular_content['items'] ?? 4 ) ),
+				'period'             => $popular_period,
+				'content_types'      => $popular_content_types,
+				'manual_ids'         => $popular_manual_ids,
+				'taxonomy'           => $popular_taxonomy,
+				'term_ids'           => $popular_term_ids,
+				'singular_position'  => $popular_position,
+				'show_on_singular'   => ! empty( $popular_content['show_on_singular'] ),
+				'devices'            => $popular_device_flags,
+				'show_image'         => ! empty( $popular_content['show_image'] ),
+				'show_taxonomy'      => ! empty( $popular_content['show_taxonomy'] ),
+				'show_date'          => ! empty( $popular_content['show_date'] ),
+				'show_excerpt'       => ! empty( $popular_content['show_excerpt'] ),
+				'columns_desktop'    => $popular_columns_desktop,
+				'columns_tablet'     => $popular_columns_tablet,
+				'columns_mobile'     => $popular_columns_mobile,
+				'image_ratio_width'  => $popular_ratio_width,
+				'image_ratio_height' => $popular_ratio_height,
+				'card_gap'           => $popular_card_gap,
+				'card_style'         => $popular_card_style,
+			),
+			'posts_grid'                   => $posts_grid,
+			'color_mode'                   => array(
+				'enabled'      => ! empty( $color_mode['enabled'] ),
+				'default_mode' => $color_mode_default,
+				'show_switch'      => ! empty( $color_mode['show_switch'] ),
+				'show_menu_switch' => ! empty( $color_mode['show_menu_switch'] ),
+				'position'     => $color_mode_position,
+				'devices'      => $color_mode_device_flags,
+				'palette'      => $color_mode_palette,
+			),
+			'search_modal'                 => array(
+				'enabled'           => ! empty( $search_modal['enabled'] ),
+				'show_menu_trigger' => ! empty( $search_modal['show_menu_trigger'] ),
+				'placeholder'       => $search_placeholder,
 			),
 			'floating_action'              => array(
 				'enabled'         => ! empty( $floating_action['enabled'] ),

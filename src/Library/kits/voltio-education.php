@@ -1,0 +1,56 @@
+<?php
+if ( ! defined( 'ABSPATH' ) ) { exit; }
+
+return array(
+	'id'          => 'voltio-education',
+	'title'       => __( 'Voltio Education Kit', 'creceweb-lumen-lite' ),
+	'description' => __( 'Nine-page Education Kit with a bold dark visual system, high-contrast cards, courses, quick lessons, resources, method, and contact.', 'creceweb-lumen-lite' ),
+	'use'         => __( 'Insert only the pages you need. Complete Voltio pages recommend Lumen: Full width automatically; individual sections never change the current page template.', 'creceweb-lumen-lite' ),
+	'preview_url' => CRECEWEB_LUMEN_LITE_URL . 'assets/images/library-previews/voltio-education-kit-v1.webp',
+	'config_preset' => 'voltio-theme.json',
+	'site_setup' => array(
+		'pages' => array(
+			array( 'key' => 'home', 'item' => 'page-home-education-voltio', 'title' => __( 'Home', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'courses', 'item' => 'page-education-courses-voltio-page', 'title' => __( 'Courses', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'capsules', 'item' => 'page-education-capsules-voltio-page', 'title' => __( 'Capsules', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'resources', 'item' => 'page-education-resources-voltio-page', 'title' => __( 'Resources', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'method', 'item' => 'page-education-method-voltio-page', 'title' => __( 'Method', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'contact', 'item' => 'page-education-contact-voltio-page', 'title' => __( 'Contact', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'course-detail', 'item' => 'page-education-course-detail-voltio-page', 'title' => __( 'AI Without Autopilot', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'capsule-detail', 'item' => 'page-education-capsule-detail-voltio-page', 'title' => __( 'Prompts with Context', 'creceweb-lumen-lite' ) ),
+			array( 'key' => 'resource-detail', 'item' => 'page-education-resource-detail-voltio-page', 'title' => __( 'A 30-Day Plan for Using AI with Judgement', 'creceweb-lumen-lite' ) ),
+		),
+		'front_page' => 'home',
+		'menu_name' => __( 'Voltio Education', 'creceweb-lumen-lite' ),
+		'menu_location' => 'primary',
+		'navigation' => array(
+			array( 'page' => 'home' ),
+			array( 'page' => 'courses' ),
+			array( 'page' => 'course-detail', 'parent' => 'courses' ),
+			array( 'page' => 'capsules' ),
+			array( 'page' => 'capsule-detail', 'parent' => 'capsules' ),
+			array( 'page' => 'resources' ),
+			array( 'page' => 'resource-detail', 'parent' => 'resources' ),
+			array( 'page' => 'method' ),
+			array( 'page' => 'contact' ),
+			array( 'label' => __( 'Start', 'creceweb-lumen-lite' ), 'target_page' => 'contact', 'highlight' => true ),
+		),
+	),
+	'items'       => array(
+		'page-home-education-voltio',
+		'page-education-courses-voltio-page',
+		'page-education-capsules-voltio-page',
+		'page-education-resources-voltio-page',
+		'page-education-method-voltio-page',
+		'page-education-contact-voltio-page',
+		'page-education-course-detail-voltio-page',
+		'page-education-capsule-detail-voltio-page',
+		'page-education-resource-detail-voltio-page',
+	),
+	'keywords' => array(
+		__( 'education', 'creceweb-lumen-lite' ),
+		__( 'courses', 'creceweb-lumen-lite' ),
+		__( 'learning', 'creceweb-lumen-lite' ),
+		__( 'Voltio', 'creceweb-lumen-lite' ),
+	),
+);
