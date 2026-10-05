@@ -67,6 +67,18 @@ if ( ! function_exists( 'cw_lumen_lite_library_families' ) ) {
 	}
 }
 
+if ( ! function_exists( 'cw_lumen_lite_library_kits' ) ) {
+	/**
+	 * Returns data-only Kit groupings registered in the shared Library.
+	 *
+	 * @return array<string,array<string,mixed>>
+	 */
+	function cw_lumen_lite_library_kits(): array {
+		$plugin = cw_lumen_lite();
+		return null !== $plugin ? $plugin->kit_catalog()->items() : array();
+	}
+}
+
 
 if ( ! function_exists( 'cw_lumen_lite_is_theme_compatible' ) ) {
 	/**
